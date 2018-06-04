@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Estagio.Nucleo
 {
-    public class Cliente
+    public class Produto
     {
         public int Id { get; set; }
         public string Descricao { get; set; }
