@@ -32,6 +32,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,6 +44,12 @@
   <ItemGroup>
     <Compile Include="Cliente.cs" />
     <Compile Include="CPFCNPJ.cs" />
+    <Compile Include="Forms\FormTeste.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormTeste.Designer.cs">
+      <DependentUpon>FormTeste.cs</DependentUpon>
+    </Compile>
     <Compile Include="Fornecedor.cs" />
     <Compile Include="Produto.cs" />
     <Compile Include="Repositorios\IRepositorio.cs" />
@@ -54,6 +62,11 @@
     <Compile Include="Repositorios\RepositorioDeFornecedor.cs" />
     <Compile Include="Repositorios\RepositorioDeMovimentacao.cs" />
     <Compile Include="Repositorios\RepositorioDoProduto.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Forms\FormTeste.resx">
+      <DependentUpon>FormTeste.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

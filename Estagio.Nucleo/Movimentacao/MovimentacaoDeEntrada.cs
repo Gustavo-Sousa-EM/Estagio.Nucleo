@@ -9,5 +9,7 @@ namespace Estagio.Nucleo.Movimentacao
     public class MovimentacaoDeEntrada : MovimentacaoDeEstoqueAbstrato
     {
        public Fornecedor fornecedor { get; set; }
+
+
     }
 }
