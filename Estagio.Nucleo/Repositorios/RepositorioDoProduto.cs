@@ -7,36 +7,36 @@ using Estagio.Nucleo.IRepositorio;
 
 namespace Estagio.Nucleo.Repositorios
 {
-    class RepositorioDoProduto : IRepositorio<Produto>
+    class RepositorioDoProduto : IRepositorio<Cliente>
     {
         public static readonly RepositorioDoProduto Instancia = new RepositorioDoProduto();
-        private List<Produto> _produtos = new List<Produto>();
+        private List<Cliente> _produtos = new List<Cliente>();
 
         private RepositorioDoProduto()
         {
             RepositorioDoProduto rp = new RepositorioDoProduto();
         }
-        public void Add(Produto item)
+        public void Add(Cliente item)
         {
             _produtos.Add(item);
         }
 
-        public void Delete(Produto item)
+        public void Delete(Cliente item)
         {
             _produtos.Remove(item);
         }
 
-        public IEnumerable<Produto> GetAll()
+        public IEnumerable<Cliente> GetAll()
         {
             return _produtos;
         }
 
-        public Produto GetById(int Id)
+        public Cliente GetById(int Id)
         {
            return _produtos.Find(x => x.Id == Id);
         }
 
-        public void Update(Produto item)
+        public void Update(Cliente item)
         {
             _produtos.Remove(item);
             _produtos.Add(item);
