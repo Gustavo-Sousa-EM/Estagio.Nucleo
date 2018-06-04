@@ -43,12 +43,12 @@
     <Compile Include="Cliente.cs" />
     <Compile Include="CPFCNPJ.cs" />
     <Compile Include="Fornecedor.cs" />
+    <Compile Include="Produto.cs" />
     <Compile Include="Repositorios\IRepositorio.cs" />
     <Compile Include="Movimentacao\ItemMovimentacao.cs" />
     <Compile Include="Movimentacao\MovimentacaoDeEntrada.cs" />
     <Compile Include="Movimentacao\MovimentacaoDeSaida.cs" />
     <Compile Include="Movimentacao\MovimentacaoDeEstoqueAbstrato.cs" />
-    <Compile Include="Produto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositorios\RepositorioDeCliente.cs" />
     <Compile Include="Repositorios\RepositorioDeFornecedor.cs" />
