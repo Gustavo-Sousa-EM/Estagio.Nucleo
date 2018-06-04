@@ -8,12 +8,12 @@ namespace Estagio.Nucleo.IRepositorio
 {
     interface IRepositorio<T>
     {
-        void Add(T Item);
-        void Delete(T Item);
+        void Add(T item);
+        void Delete(T item);
 
-        void Update(T Item);
+        void Update(T item);
         IEnumerable<T> GetAll();
-        T GetByld(int Id);
+        T GetById(int Id);
     }
 
 }

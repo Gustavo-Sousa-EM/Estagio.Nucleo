@@ -11,36 +11,38 @@ namespace Estagio.Nucleo.Repositorios
 {
     class RepositorioDeMovimentacao : IRepositorio<MovimentacaoDeEstoqueAbstrato>
     {
-        RepositorioDeMovimentacao RespositrioMovimentacao = new RepositorioDeMovimentacao();
+        public static readonly RepositorioDeMovimentacao Instancia = new RepositorioDeMovimentacao();
+        private List<MovimentacaoDeEstoqueAbstrato> _movimentacaoDeEstoqueAbstratos = new List<MovimentacaoDeEstoqueAbstrato>();
 
-        public RepositorioDeMovimentacao()
+        private RepositorioDeMovimentacao()
         {
 
         }
 
-        public void Add(MovimentacaoDeEstoqueAbstrato Item)
+        public void Add(MovimentacaoDeEstoqueAbstrato item)
         {
-            throw new NotImplementedException();
+            _movimentacaoDeEstoqueAbstratos.Add(item);
         }
 
-        public void Delete(MovimentacaoDeEstoqueAbstrato Item)
+        public void Delete(MovimentacaoDeEstoqueAbstrato item)
         {
-            throw new NotImplementedException();
+            _movimentacaoDeEstoqueAbstratos.Remove(item);
         }
 
         public IEnumerable<MovimentacaoDeEstoqueAbstrato> GetAll()
         {
-            throw new NotImplementedException();
+            return _movimentacaoDeEstoqueAbstratos;
         }
 
-        public MovimentacaoDeEstoqueAbstrato GetByld(int Id)
+        public MovimentacaoDeEstoqueAbstrato GetById(int Id)
         {
-            throw new NotImplementedException();
+            return _movimentacaoDeEstoqueAbstratos.Find(x => x.Id == Id);
         }
 
-        public void Update(MovimentacaoDeEstoqueAbstrato Item)
+        public void Update(MovimentacaoDeEstoqueAbstrato item)
         {
-            throw new NotImplementedException();
+            _movimentacaoDeEstoqueAbstratos.Add(item);
+            _movimentacaoDeEstoqueAbstratos.Remove(item);
         }
     }
 }

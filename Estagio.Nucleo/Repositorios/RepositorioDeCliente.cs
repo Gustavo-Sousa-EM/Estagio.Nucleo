@@ -9,36 +9,38 @@ namespace Estagio.Nucleo.Repositorios
 {
     class RepositorioDeCliente : IRepositorio<Cliente>
     {
-        public RepositorioDeCliente RepositoroCliente = new RepositorioDeCliente();
+        public static readonly RepositorioDeCliente Instancia = new RepositorioDeCliente();
+        private List<Cliente> _clientes = new List<Cliente>();
 
         private RepositorioDeCliente()
         {
 
         }
 
-        public void Add(Cliente Item)
+        public void Add(Cliente item)
         {
-            throw new NotImplementedException();
+            _clientes.Add(item);
         }
 
-        public void Delete(Cliente Item)
+        public void Delete(Cliente item)
         {
-            throw new NotImplementedException();
+            _clientes.Remove(item);
         }
 
         public IEnumerable<Cliente> GetAll()
         {
-            throw new NotImplementedException();
+            return _clientes;
         }
 
-        public Cliente GetByld(int Id)
+        public Cliente GetById(int Id)
         {
-            throw new NotImplementedException();
+            return _clientes.Find(x => x.Id == Id);
         }
 
-        public void Update(Cliente Item)
+        public void Update(Cliente item)
         {
-            throw new NotImplementedException();
+            _clientes.Add(item);
+            _clientes.Remove(item);
         }
     }
 }

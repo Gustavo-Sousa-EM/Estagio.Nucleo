@@ -9,35 +9,37 @@ namespace Estagio.Nucleo.Repositorios
 {
     class RepositorioDoProduto : IRepositorio<Produto>
     {
-        public RepositorioDoProduto RepositorioProduto = new RepositorioDoProduto();
+        public static readonly RepositorioDoProduto Instancia = new RepositorioDoProduto();
+        private List<Produto> _produtos = new List<Produto>();
 
         private RepositorioDoProduto()
         {
-
+            RepositorioDoProduto rp = new RepositorioDoProduto();
         }
-        public void Add(Produto Item)
+        public void Add(Produto item)
         {
-            throw new NotImplementedException();
+            _produtos.Add(item);
         }
 
-        public void Delete(Produto Item)
+        public void Delete(Produto item)
         {
-            throw new NotImplementedException();
+            _produtos.Remove(item);
         }
 
         public IEnumerable<Produto> GetAll()
         {
-            throw new NotImplementedException();
+            return _produtos;
         }
 
-        public Produto GetByld(int Id)
+        public Produto GetById(int Id)
         {
-            throw new NotImplementedException();
+           return _produtos.Find(x => x.Id == Id);
         }
 
-        public void Update(Produto Item)
+        public void Update(Produto item)
         {
-            throw new NotImplementedException();
+            _produtos.Remove(item);
+            _produtos.Add(item);
         }
     }
 }

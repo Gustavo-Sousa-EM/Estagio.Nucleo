@@ -9,35 +9,37 @@ namespace Estagio.Nucleo.Repositorios
 {
     class RepositorioDeFornecedor : IRepositorio<Fornecedor>
     {
-        RepositorioDeFornecedor RepositorioFornecedor = new RepositorioDeFornecedor();
+        public static readonly RepositorioDeFornecedor Instancia = new RepositorioDeFornecedor();
+        private List<Fornecedor> _fornecedores = new List<Fornecedor>();
 
-        public RepositorioDeFornecedor()
+        private RepositorioDeFornecedor()
         {
 
         }
-        public void Add(Fornecedor Item)
+        public void Add(Fornecedor item)
         {
-            throw new NotImplementedException();
+            _fornecedores.Add(item);
         }
 
-        public void Delete(Fornecedor Item)
+        public void Delete(Fornecedor item)
         {
-            throw new NotImplementedException();
+            _fornecedores.Remove(item);
         }
 
         public IEnumerable<Fornecedor> GetAll()
         {
-            throw new NotImplementedException();
+            return _fornecedores;
         }
 
-        public Fornecedor GetByld(int Id)
+        public Fornecedor GetById(int Id)
         {
-            throw new NotImplementedException();
+            return _fornecedores.Find(x => x.Id == Id);
         }
 
-        public void Update(Fornecedor Item)
+        public void Update(Fornecedor item)
         {
-            throw new NotImplementedException();
+            _fornecedores.Add(item);
+            _fornecedores.Remove(item);
         }
     }
 }

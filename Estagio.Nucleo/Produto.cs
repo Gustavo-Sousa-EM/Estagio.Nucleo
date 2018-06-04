@@ -12,5 +12,8 @@ namespace Estagio.Nucleo
         public string Descricao { get; set; }
         public int QuantidadeMinimaEstoque { get; set; }
         public decimal PrecoUnitario { get; set; }
+
     }
+
+    
 }
