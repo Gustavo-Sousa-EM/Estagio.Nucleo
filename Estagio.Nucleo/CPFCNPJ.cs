@@ -8,161 +8,165 @@ namespace Estagio.Nucleo
 {
     public class CPFCNPJ
     {
+        private string _numero;
+
+        private const int TamanhoDoCNPJ = 14;
+        private const int TamanhoDoCPF = 11;
+
         public CPFCNPJ(string numero)
         {
-            numero = numero.Trim();
-            numero = numero.Replace(".", "").Replace("-", "");
-            if (EhCpf(numero))
-            {
-                ValideCPF(numero);
-                //throw new ApplicationException("CPF Invvalido!");
-            }
-            else if (numero.Length == 14)
-            {
-                var resto = 0;
-                var soma = 0;
-                var peso1 = new int[] { 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
-                var peso2 = new int[] { 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
-                var CNPJD = new int[14];
+            _numero = numero ?? throw new ArgumentNullException(nameof(numero));
 
-                for (var IContador = 0; IContador < CNPJD.Length; IContador++)
-                {
-                    CNPJD[IContador] = int.Parse(numero[IContador].ToString());
-                }
-                for (var IContador = 0; IContador < peso1.Length; IContador++)
-                {
-                    soma += CNPJD[IContador] * peso1[IContador];
-                }
-                resto = soma % 11;
-                if (resto < 2)
-                {
-                    resto = 0;
-                }
-                else
-                {
-                    resto = 11 - resto;
-                }
-                if (resto == CNPJD[12])
-                {
-                    for (var IContador = 0; IContador < peso2.Length; IContador++)
-                    {
-                        soma += CNPJD[IContador] * peso2[IContador];
-                    }
-                    resto = soma % 11;
-                    if (resto < 2)
-                    {
-                        resto = 0;
-                    }
-                    else
-                    {
-                        resto = 11 - resto;
-                    }
-                    if (resto == CNPJD[13])
-                    {
-                        Console.WriteLine("CNPJ Válido!");
-                        var cpfFormatado = Convert.ToUInt64(numero).ToString(@"00\.000\.000\/0000\-00");
-                        Console.WriteLine("CNPJ " + cpfFormatado);
-                        Console.ReadKey();
-                    }
-                }
+            RemovaCarecteresNaoNumericos();
+
+            if (!(EhCPFValido() || EhCPNJValido()))
+            {
+                throw new ApplicationException("CPF/CNPJ inválido");
+            }
+        }
+
+        public string Numero { get => _numero; }
+
+        private bool EhDoTamanhoCorretoDeCNPJ(string numero)
+        {
+            return numero.Length == TamanhoDoCNPJ;
+        }
+
+        private bool EhDoTamanhoCorretoDoCPF(string numero)
+        {
+            return numero.Length == TamanhoDoCPF;
+        }
+
+        private void RemovaCarecteresNaoNumericos()
+        {
+            _numero = new string(_numero.Where(c => char.IsNumber(c)).ToArray());
+        }
+
+        private bool EhCPFValido()
+        {
+            if (!EhDoTamanhoCorretoDoCPF(_numero))
+            {
+                return false;
+            }
+
+            var numeros = _numero.Select(c => int.Parse(c.ToString())).ToArray();
+
+            var soma = 0;
+            for (var i = 0; i < 9; i++)
+            {
+                soma += (10 - i) * numeros[i];
+            }
+
+            var resto = soma % 11;
+
+            if (resto < 2)
+            {
+                if (numeros[9] != 0) return false;
             }
             else
             {
-                throw new ArgumentException();
+                if (numeros[9] != 11 - resto) return false;
             }
 
-        }
-
-        private static bool ValideCPF(string numero)
-        {
-            var resto = 0;
-            var soma = 0;
-            var calcularPeso1 = new int[] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
-            var calcularPeso2 = new int[] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
-            var cpfD = new int[11];
+            soma = 0;
+            for (var i = 0; i < 10; i++)
             {
-                var validador = false;
-                while (validador == false)
-                {
-                    var contador = 0;
-                    var iContador = 0;
-                    while (iContador != 11)
-                    {
-                        foreach (var item2 in numero)
-                        {
-                            var Intitem2 = Convert.ToInt32(item2.ToString());
-                            if (Intitem2 == iContador)
-                            {
-                                contador++;
-                            }
-                        }
-                        if (contador == 11)
-                        {
-                            validador = false;
-                        }
-                        else
-                        {
-                            iContador++;
-                            contador = 0;
-                            validador = true;
-                        }
-                    }
-                    validador = true; ;
-                }
-                if (validador)
-                {
-                    var iContador = 0;
-                    for (var jContador = 0; jContador < cpfD.Length; jContador++)
-                    {
-                        cpfD[iContador++] = int.Parse(numero[jContador].ToString());
-                    }
-
-                    for (var jContador = 0; jContador < calcularPeso1.Length; jContador++)
-                    {
-                        soma += cpfD[jContador] * calcularPeso1[jContador];
-                    }
-                    resto = soma % 11;
-                    if (resto < 2)
-                    {
-                        resto = 0;
-                    }
-                    else
-                    {
-                        resto = 11 - resto;
-                    }
-                    if (resto == cpfD[9])
-                    {
-                        soma = 0;
-                        for (var jContador = 0; jContador < calcularPeso2.Length; jContador++)
-                        {
-                            soma += cpfD[jContador] * calcularPeso2[jContador];
-                        }
-                        resto = soma % 11;
-                        if (resto < 2)
-                        {
-                            resto = 0;
-                        }
-                        else
-                        {
-                            resto = 11 - resto;
-                        }
-                        if (resto == cpfD[10])
-                        {
-                            var cpfFormatado = Convert.ToUInt64(numero).ToString(@"000\.000\.000\-00");
-                            return true;
-                        }
-                    }
-                }
+                soma += (11 - i) * numeros[i];
             }
-            return false;
+
+            resto = soma % 11;
+
+            if (resto < 2)
+            {
+                if (numeros[10] != 0) return false;
+            }
+            else
+            {
+                if (numeros[10] != 11 - resto) return false;
+            }
+
+
+            return true;
         }
 
-        private static bool EhCpf(string numero)
+        private bool EhCPNJValido()
         {
-            return numero.Length == 11;
+            if (!EhDoTamanhoCorretoDeCNPJ(_numero))
+            {
+                return false;
+            }
+
+            var numeros = _numero.Select(c => int.Parse(c.ToString())).ToArray();
+
+            var multiplicador1 = new int[12] { 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
+            var multiplicador2 = new int[13] { 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
+
+            var soma = 0;
+
+            for (var i = 0; i < 12; i++)
+            {
+                soma += numeros[i] * multiplicador1[i];
+            }
+
+            var resto = soma % 11;
+
+            if (resto < 2)
+            {
+                if (numeros[12] != 0) return false;
+            }
+            else
+            {
+                if (numeros[12] != 11 - resto) return false;
+            }
+
+            soma = 0;
+            for (var i = 0; i < 13; i++)
+            {
+                soma += numeros[i] * multiplicador2[i];
+            }
+
+            resto = soma % 11;
+
+            if (resto < 2)
+            {
+                if (numeros[13] != 0) return false;
+            }
+            else
+            {
+                if (numeros[13] != 11 - resto) return false;
+            }
+
+            return true;
         }
+
+        public string ObtenhaCPFCNPJFormatado()
+        {
+            var cpfFormatado = String.Empty;
+            if (EhDoTamanhoCorretoDoCPF(_numero))
+            {
+                cpfFormatado = Convert.ToUInt64(_numero).ToString(@"000\.000\.000\-00");
+            }
+            else
+            {
+                cpfFormatado = Convert.ToUInt64(_numero).ToString(@"00\.000\.000\/0000\-00");
+            }
+            return cpfFormatado;
+        }
+
+        public override string ToString()
+        {
+            return _numero;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return (obj is CPFCNPJ cPFCNPJ) && cPFCNPJ._numero == _numero;
+        }
+
+        public override int GetHashCode()
+        {
+            return _numero.GetHashCode();
+        }
+
     }
-
 }
-
-
