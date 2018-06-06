@@ -39,9 +39,14 @@ namespace Estagio.Nucleo.Repositorios
 
         public void Update(Cliente item)
         {
-
-            _clientes.Remove(item);
-            _clientes.Add(item);
+            if (_clientes.Remove(GetById(item.Id)))
+            {
+                _clientes.Add(item);
+            }
+            else
+            {
+                throw new ApplicationException("Produto não existe!");
+            }
         }
     }
 }

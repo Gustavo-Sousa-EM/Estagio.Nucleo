@@ -41,8 +41,14 @@ namespace Estagio.Nucleo.Repositorios
 
         public void Update(MovimentacaoDeEstoqueAbstrato item)
         {
-            _movimentacaoDeEstoqueAbstratos.Add(item);
-            _movimentacaoDeEstoqueAbstratos.Remove(item);
+            if (_movimentacaoDeEstoqueAbstratos.Remove(GetById(item.Id)))
+            {
+                _movimentacaoDeEstoqueAbstratos.Add(item);
+            }
+            else
+            {
+                throw new ApplicationException("Produto não existe!");
+            }
         }
     }
 }

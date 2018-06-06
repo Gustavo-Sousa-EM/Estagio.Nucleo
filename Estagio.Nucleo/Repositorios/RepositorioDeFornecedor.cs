@@ -38,8 +38,14 @@ namespace Estagio.Nucleo.Repositorios
 
         public void Update(Fornecedor item)
         {
-            _fornecedores.Add(item);
-            _fornecedores.Remove(item);
+            if (_fornecedores.Remove(GetById(item.Id)))
+            {
+                _fornecedores.Add(item);
+            }
+            else
+            {
+                throw new ApplicationException("Produto não existe!");
+            }
         }
     }
 }
