@@ -7,39 +7,47 @@ using Estagio.Nucleo.IRepositorio;
 
 namespace Estagio.Nucleo.Repositorios
 {
-    class RepositorioDoProduto : IRepositorio<Cliente>
+    public class RepositorioDoProduto : IRepositorio<Produto>
     {
         public static readonly RepositorioDoProduto Instancia = new RepositorioDoProduto();
-        private List<Cliente> _produtos = new List<Cliente>();
+        private List<Produto> _produtos = new List<Produto>();
 
         private RepositorioDoProduto()
         {
-            RepositorioDoProduto rp = new RepositorioDoProduto();
+
         }
-        public void Add(Cliente item)
+        public void Add(Produto item)
         {
             _produtos.Add(item);
         }
 
-        public void Delete(Cliente item)
+        public void Delete(Produto item)
         {
             _produtos.Remove(item);
         }
 
-        public IEnumerable<Cliente> GetAll()
+        public IEnumerable<Produto> GetAll()
         {
             return _produtos;
         }
 
-        public Cliente GetById(int Id)
+        public Produto GetById(int id)
         {
-           return _produtos.Find(x => x.Id == Id);
+            return _produtos.Find(x => x.Id == id);
         }
 
-        public void Update(Cliente item)
+        public void Update(Produto item)
         {
-            _produtos.Remove(item);
-            _produtos.Add(item);
+            
+            //var produtoUpdate = _produtos.Find(p => p.Id == item.Id);
+            if (_produtos.Remove(GetById(item.Id)))
+            {
+                _produtos.Add(item);
+            }
+            else
+            {
+                throw new ApplicationException("Produto não existe!");
+            }
         }
     }
 }

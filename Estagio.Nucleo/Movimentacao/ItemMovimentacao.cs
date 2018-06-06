@@ -11,7 +11,7 @@ namespace Estagio.Nucleo.Movimentacao
         public decimal ValorUnitario { get; set; }
         public int Quantidade { get; set; }
        
-        public Cliente Produto { get; set; }
+        public Produto Produto { get; set; }
         public decimal ValorMovimentacao
         {
             get

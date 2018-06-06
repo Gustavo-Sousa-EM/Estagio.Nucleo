@@ -13,6 +13,11 @@ namespace Estagio.Nucleo
         public int QuantidadeMinimaEstoque { get; set; }
         public decimal PrecoUnitario { get; set; }
 
+        public override string ToString()
+        {
+            return Descricao;
+        }
+
     }
 
 

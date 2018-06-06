@@ -7,7 +7,7 @@ using Estagio.Nucleo.IRepositorio;
 
 namespace Estagio.Nucleo.Repositorios
 {
-    class RepositorioDeCliente : IRepositorio<Cliente>
+    public class RepositorioDeCliente : IRepositorio<Cliente>
     {
         public static readonly RepositorioDeCliente Instancia = new RepositorioDeCliente();
         private List<Cliente> _clientes = new List<Cliente>();
@@ -39,8 +39,9 @@ namespace Estagio.Nucleo.Repositorios
 
         public void Update(Cliente item)
         {
-            _clientes.Add(item);
+
             _clientes.Remove(item);
+            _clientes.Add(item);
         }
     }
 }

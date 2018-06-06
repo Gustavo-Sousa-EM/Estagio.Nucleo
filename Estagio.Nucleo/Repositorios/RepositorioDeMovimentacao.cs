@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Estagio.Nucleo.Repositorios
 {
-    class RepositorioDeMovimentacao : IRepositorio<MovimentacaoDeEstoqueAbstrato>
+    public class RepositorioDeMovimentacao : IRepositorio<MovimentacaoDeEstoqueAbstrato>
     {
         public static readonly RepositorioDeMovimentacao Instancia = new RepositorioDeMovimentacao();
         private List<MovimentacaoDeEstoqueAbstrato> _movimentacaoDeEstoqueAbstratos = new List<MovimentacaoDeEstoqueAbstrato>();

@@ -7,7 +7,7 @@ using Estagio.Nucleo.IRepositorio;
 
 namespace Estagio.Nucleo.Repositorios
 {
-    class RepositorioDeFornecedor : IRepositorio<Fornecedor>
+    public class RepositorioDeFornecedor : IRepositorio<Fornecedor>
     {
         public static readonly RepositorioDeFornecedor Instancia = new RepositorioDeFornecedor();
         private List<Fornecedor> _fornecedores = new List<Fornecedor>();
