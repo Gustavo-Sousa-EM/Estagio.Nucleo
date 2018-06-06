@@ -29,19 +29,28 @@ namespace formTeste
             }
             catch (ApplicationException)
             {
-                MessageBox.Show("Campo vazio!\nPreencha com algum CPF / CNPJ válido!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Question);
-                tbCpfCnpj.Focus();
+                if (String.IsNullOrWhiteSpace(tbCpfCnpj.Text))
+                {
+                    MessageBox.Show("Campo vazio!\nPreencha com algum CPF / CNPJ válido!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    tbCpfCnpjFormatado.Text = String.Empty;
+                }
+                else
+                {
+                    MessageBox.Show("CPF / CNPJ Inválido!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    tbCpfCnpjFormatado.Text = String.Empty;
+                }
             }
-
+            tbCpfCnpj.Focus();
         }
+        
 
 
-        private void tbCpfCnpj_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8)
+            private void tbCpfCnpj_KeyPress(object sender, KeyPressEventArgs e)
             {
-                e.Handled = true;
+                if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8)
+                {
+                    e.Handled = true;
+                }
             }
         }
     }
-}
