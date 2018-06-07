@@ -17,7 +17,7 @@ namespace Estagio.Nucleo.Repositorios
 
         }
         public void Add(Produto item)
-        {
+        { 
             _produtos.Add(item);
         }
 
