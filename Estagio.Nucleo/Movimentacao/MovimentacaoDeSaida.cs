@@ -8,9 +8,11 @@ namespace Estagio.Nucleo.Movimentacao
 {
     public class MovimentacaoDeSaida : MovimentacaoDeEstoqueAbstrato
     {
-        public Produto cliente { get; set; }
+        public Cliente cliente { get; set; }
 
+        
     }
+    
 
 }
 

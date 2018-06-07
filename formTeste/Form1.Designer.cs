@@ -38,7 +38,7 @@
             this.btUpdate = new System.Windows.Forms.Button();
             this.cmbSelecionaProduto = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.btVenda = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -100,7 +100,7 @@
             // 
             // btUpdate
             // 
-            this.btUpdate.Location = new System.Drawing.Point(410, 143);
+            this.btUpdate.Location = new System.Drawing.Point(387, 142);
             this.btUpdate.Name = "btUpdate";
             this.btUpdate.Size = new System.Drawing.Size(75, 23);
             this.btUpdate.TabIndex = 11;
@@ -126,12 +126,23 @@
             this.label4.TabIndex = 13;
             this.label4.Text = "Descriçao:";
             // 
+            // btVenda
+            // 
+            this.btVenda.Location = new System.Drawing.Point(482, 142);
+            this.btVenda.Name = "btVenda";
+            this.btVenda.Size = new System.Drawing.Size(75, 23);
+            this.btVenda.TabIndex = 14;
+            this.btVenda.Text = "Venda";
+            this.btVenda.UseVisualStyleBackColor = true;
+            this.btVenda.Click += new System.EventHandler(this.btVenda_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(700, 485);
+            this.Controls.Add(this.btVenda);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.cmbSelecionaProduto);
             this.Controls.Add(this.btUpdate);
@@ -162,7 +173,7 @@
         private System.Windows.Forms.Button btUpdate;
         private System.Windows.Forms.ComboBox cmbSelecionaProduto;
         private System.Windows.Forms.Label label4;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Button btVenda;
     }
 }
 

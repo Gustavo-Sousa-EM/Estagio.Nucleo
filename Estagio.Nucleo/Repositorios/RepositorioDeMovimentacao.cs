@@ -21,12 +21,22 @@ namespace Estagio.Nucleo.Repositorios
 
         public void Add(MovimentacaoDeEstoqueAbstrato item)
         {
-            _movimentacaoDeEstoqueAbstratos.Add(item);
+            if (_movimentacaoDeEstoqueAbstratos.Contains(GetById(item.Id)))
+            {
+                throw new ApplicationException("Produto ja existe!");
+            }
+            else
+            {
+                _movimentacaoDeEstoqueAbstratos.Add(item);
+            }
         }
 
         public void Delete(MovimentacaoDeEstoqueAbstrato item)
         {
-            _movimentacaoDeEstoqueAbstratos.Remove(item);
+            if (!_movimentacaoDeEstoqueAbstratos.Remove(GetById(item.Id)))
+            {
+                throw new ApplicationException("Produto não existe!");
+            }
         }
 
         public IEnumerable<MovimentacaoDeEstoqueAbstrato> GetAll()
@@ -41,14 +51,8 @@ namespace Estagio.Nucleo.Repositorios
 
         public void Update(MovimentacaoDeEstoqueAbstrato item)
         {
-            if (_movimentacaoDeEstoqueAbstratos.Remove(GetById(item.Id)))
-            {
-                _movimentacaoDeEstoqueAbstratos.Add(item);
-            }
-            else
-            {
-                throw new ApplicationException("Produto não existe!");
-            }
+            Delete(item);
+            _movimentacaoDeEstoqueAbstratos.Add(item);
         }
     }
 }

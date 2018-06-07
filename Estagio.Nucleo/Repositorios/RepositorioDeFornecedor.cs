@@ -18,12 +18,22 @@ namespace Estagio.Nucleo.Repositorios
         }
         public void Add(Fornecedor item)
         {
-            _fornecedores.Add(item);
+            if (_fornecedores.Contains(GetById(item.Id)))
+            {
+                throw new ApplicationException("Produto ja existe!");
+            }
+            else
+            {
+                _fornecedores.Add(item);
+            }
         }
 
         public void Delete(Fornecedor item)
         {
-            _fornecedores.Remove(item);
+            if (_fornecedores.Remove(GetById(item.Id)))
+            {
+                throw new ApplicationException("Produto não existe!");
+            }
         }
 
         public IEnumerable<Fornecedor> GetAll()
@@ -38,14 +48,8 @@ namespace Estagio.Nucleo.Repositorios
 
         public void Update(Fornecedor item)
         {
-            if (_fornecedores.Remove(GetById(item.Id)))
-            {
-                _fornecedores.Add(item);
-            }
-            else
-            {
-                throw new ApplicationException("Produto não existe!");
-            }
+            Delete(item);
+            _fornecedores.Add(item);
         }
     }
 }

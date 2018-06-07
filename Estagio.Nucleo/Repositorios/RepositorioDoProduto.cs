@@ -17,15 +17,25 @@ namespace Estagio.Nucleo.Repositorios
 
         }
         public void Add(Produto item)
-        { 
-            _produtos.Add(item);
+        {
+            if (_produtos.Contains(GetById(item.Id)))
+            {
+                throw new ApplicationException("Produto ja existe!");
+            }
+            else
+            {
+                _produtos.Add(item);
+            }
         }
 
         public void Delete(Produto item)
         {
-            _produtos.Remove(item);
+            if (!_produtos.Remove(GetById(item.Id)))
+            {
+                throw new ApplicationException("Produto não existe!");
+            }
+            
         }
-
         public IEnumerable<Produto> GetAll()
         {
             return _produtos;
@@ -38,16 +48,9 @@ namespace Estagio.Nucleo.Repositorios
 
         public void Update(Produto item)
         {
-            
-            //var produtoUpdate = _produtos.Find(p => p.Id == item.Id);
-            if (_produtos.Remove(GetById(item.Id)))
-            {
-                _produtos.Add(item);
-            }
-            else
-            {
-                throw new ApplicationException("Produto não existe!");
-            }
+            Delete(item);
+            _produtos.Add(item);
+
         }
     }
 }

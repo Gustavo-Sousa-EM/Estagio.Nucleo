@@ -19,8 +19,5 @@ namespace Estagio.Nucleo.Movimentacao
                 return Quantidade * ValorUnitario;
             }
         }
-
-
-
     }
 }

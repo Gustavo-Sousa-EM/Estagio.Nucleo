@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Estagio.Nucleo;
 using Estagio.Nucleo.Repositorios;
+using Estagio.Nucleo.Movimentacao;
 
 namespace formTeste
 {
@@ -35,6 +36,14 @@ namespace formTeste
             produto02.PrecoUnitario = 30;
             produto02.QuantidadeMinimaEstoque = 20;
             produto02.Descricao = "Batata";
+
+            Cliente cliente01 = new Cliente();
+            cliente01.Id = 1;
+            cliente01.Nome = "Josivaldo";
+            CPFCNPJ cPFCNPJCliente01 = new CPFCNPJ("447.685.060-03");
+            cliente01.CPFCNPJ = cPFCNPJCliente01;
+
+            RepositorioDeCliente.Instancia.Add(cliente01);
 
             RepositorioDoProduto.Instancia.Add(produto01);
             RepositorioDoProduto.Instancia.Add(produto02);
@@ -110,6 +119,16 @@ namespace formTeste
             tbPrecoUni.Text = String.Empty;
             tbQuantidade.Text = String.Empty;
             cmbSelecionaProduto.Items.Clear();
+        }
+
+        private void btVenda_Click(object sender, EventArgs e)
+        {
+            Produto produtoVenda = new Produto();
+            produtoVenda.Id = ((Produto)cmbSelecionaProduto.SelectedItem).Id;
+            produtoVenda.Descricao = cmbSelecionaProduto.Text;
+            produtoVenda.PrecoUnitario = Convert.ToDecimal(tbPrecoUni.Text);
+            produtoVenda.QuantidadeMinimaEstoque = Convert.ToInt32(tbQuantidade.Text);
+
         }
     }
 }

@@ -19,12 +19,22 @@ namespace Estagio.Nucleo.Repositorios
 
         public void Add(Cliente item)
         {
-            _clientes.Add(item);
+            if (_clientes.Contains(GetById(item.Id)))
+            {
+                throw new ApplicationException("Produto ja existe!");
+            }
+            else
+            {
+                _clientes.Add(item);
+            }
         }
 
         public void Delete(Cliente item)
         {
-            _clientes.Remove(item);
+            if (_clientes.Remove(GetById(item.Id)))
+            {
+                throw new ApplicationException("Produto não existe!");
+            }
         }
 
         public IEnumerable<Cliente> GetAll()
@@ -39,14 +49,8 @@ namespace Estagio.Nucleo.Repositorios
 
         public void Update(Cliente item)
         {
-            if (_clientes.Remove(GetById(item.Id)))
-            {
-                _clientes.Add(item);
-            }
-            else
-            {
-                throw new ApplicationException("Produto não existe!");
-            }
+            Delete(item);
+            _clientes.Add(item);
         }
     }
 }
