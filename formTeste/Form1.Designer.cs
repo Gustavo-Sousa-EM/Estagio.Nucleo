@@ -65,6 +65,7 @@
             this.tbCpfCnpjFormatado.Name = "tbCpfCnpjFormatado";
             this.tbCpfCnpjFormatado.Size = new System.Drawing.Size(149, 20);
             this.tbCpfCnpjFormatado.TabIndex = 2;
+            this.tbCpfCnpjFormatado.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbCpfCnpjFormatado_KeyPress_1);
             // 
             // tbPrecoUni
             // 

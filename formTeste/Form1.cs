@@ -130,5 +130,12 @@ namespace formTeste
             produtoVenda.QuantidadeMinimaEstoque = Convert.ToInt32(tbQuantidade.Text);
 
         }
+
+       
+       
+        private void tbCpfCnpjFormatado_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+                e.Handled = true;
+        }
     }
 }
