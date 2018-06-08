@@ -45,6 +45,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class1.cs" />
+    <Compile Include="frmCadastroDeProduto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCadastroDeProduto.Designer.cs">
+      <DependentUpon>frmCadastroDeProduto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmEditarProduto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEditarProduto.Designer.cs">
+      <DependentUpon>frmEditarProduto.cs</DependentUpon>
+    </Compile>
     <Compile Include="WinFormsNucleo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -53,6 +66,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmCadastroDeProduto.resx">
+      <DependentUpon>frmCadastroDeProduto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEditarProduto.resx">
+      <DependentUpon>frmEditarProduto.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinFormsNucleo.resx">
       <DependentUpon>WinFormsNucleo.cs</DependentUpon>
     </EmbeddedResource>

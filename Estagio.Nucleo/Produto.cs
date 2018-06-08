@@ -13,6 +13,17 @@ namespace Estagio.Nucleo
         public int QuantidadeMinimaEstoque { get; set; }
         public decimal PrecoUnitario { get; set; }
 
+        public Produto CloneProduto()
+        {
+            return new Produto
+            {
+                Id = this.Id,
+                Descricao = this.Descricao,
+                QuantidadeMinimaEstoque = this.QuantidadeMinimaEstoque,
+                PrecoUnitario = this.PrecoUnitario
+            };
+        }
+
         public override string ToString()
         {
             return Descricao;

@@ -44,8 +44,10 @@ namespace Estagio.WinForms
 
             RepositorioDoProduto.Instancia.Add(produto01);
             RepositorioDoProduto.Instancia.Add(produto02);
-            
-            preencheDataGrid();
+
+            CrieColunasELinhasDoGrid();
+
+            preenchaColunasDoDataGrid();
         }
 
         private void panelRight_Paint(object sender, PaintEventArgs e)
@@ -62,20 +64,84 @@ namespace Estagio.WinForms
             this.Close();
         }
 
-        private void preencheDataGrid()
+        private void preenchaColunasDoDataGrid()
         {
-            var posicaoColunaId = 0;
-            var posicaoColunaDescricao = 1;
-            var listaProdutos = RepositorioDoProduto.Instancia.GetAll();
-            var iContador = 0;
-            dataGridViewProd.RowCount = listaProdutos.Count();
-            foreach (var item in listaProdutos)
+            dataGridViewProduto.DataSource = bsDataGridProduto;
+        }
+
+        private void CrieColunasELinhasDoGrid()
+        {
+            dataGridViewProduto.AutoGenerateColumns = false;
+            dataGridViewProduto.AllowUserToDeleteRows = false;
+            dataGridViewProduto.AllowUserToAddRows = false;
+            dataGridViewProduto.AllowUserToResizeColumns = false;
+            dataGridViewProduto.AllowUserToResizeRows = false;
+            bsDataGridProduto.DataSource = RepositorioDoProduto.Instancia.GetAll();
+
+
+            dataGridViewProduto.Columns.Add(new DataGridViewTextBoxColumn
             {
-                dataGridViewProd.Rows[iContador].Cells[posicaoColunaId].Value = item.Id;
-                dataGridViewProd.Rows[iContador++].Cells[posicaoColunaDescricao].Value = item.Descricao;
-                
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
+                Width = 100,
+                DataPropertyName = nameof(Produto.Id),
+                HeaderText = "ID",
+                Name = nameof(Produto.Id)
+            });
+
+            dataGridViewProduto.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
+                Width = 100,
+                DataPropertyName = nameof(Produto.Descricao),
+                HeaderText = "Descricao",
+                Name = nameof(Produto.Descricao)
+            });
+        }
+
+        protected override void OnShown(EventArgs e)
+        {
+            base.OnShown(e);
+
+            bsDataGridProduto.DataSource = RepositorioDoProduto.Instancia.GetAll();
+            bsDataGridProduto.ResetBindings(false);
+        }
+
+        private void tbTop_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                bsDataGridProduto.DataSource = RepositorioDoProduto.Instancia.GetAll().Where(p => p.Descricao.Contains(tbTop.Text) || p.Id.ToString() == tbTop.Text).ToList();
+                bsDataGridProduto.ResetBindings(false);
             }
         }
 
+        private void btnNovo_Click(object sender, EventArgs e)
+        {
+            var frmCadastroDeProduto = new frmCadastroDeProduto();
+            var resultado = frmCadastroDeProduto.ShowDialog();
+            if (resultado == DialogResult.OK)
+            {
+                OnShown(e);
+                dataGridViewProduto.Update();
+            }
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            var produtoSelecionado = (Produto)bsDataGridProduto.Current;
+            if (produtoSelecionado == null)
+            {
+                MessageBox.Show("Selecione um Produto", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            var frmCadastroDeProdutoEditar = new frmCadastroDeProdutoEditar();
+            frmCadastroDeProdutoEditar.Produto = produtoSelecionado;
+            var resultado = frmCadastroDeProdutoEditar.ShowDialog();
+            if(resultado == DialogResult.OK)
+            {
+                dataGridViewProduto.Update();
+            }
+        }
     }
+
 }
