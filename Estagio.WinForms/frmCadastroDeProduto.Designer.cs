@@ -63,6 +63,7 @@
             this.tbQtdeMinimaDeEsqoque.Name = "tbQtdeMinimaDeEsqoque";
             this.tbQtdeMinimaDeEsqoque.Size = new System.Drawing.Size(206, 20);
             this.tbQtdeMinimaDeEsqoque.TabIndex = 2;
+            this.tbQtdeMinimaDeEsqoque.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbQtdeMinimaDeEsqoque_KeyPress);
             // 
             // lbQtdeMinimaDeEstoque
             // 
@@ -90,6 +91,7 @@
             this.tbPrecoUnitario.Name = "tbPrecoUnitario";
             this.tbPrecoUnitario.Size = new System.Drawing.Size(155, 20);
             this.tbPrecoUnitario.TabIndex = 5;
+            this.tbPrecoUnitario.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPrecoUnitario_KeyPress_1);
             // 
             // flowLayoutPanel1
             // 
@@ -138,7 +140,6 @@
             this.btnCancelar.TabStop = false;
             this.btnCancelar.Text = "&Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = false;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // frmCadastroDeProduto
             // 
@@ -155,6 +156,7 @@
             this.Name = "frmCadastroDeProduto";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "frmCadastroDeProduto";
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.frmCadastroDeProduto_MouseMove_1);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

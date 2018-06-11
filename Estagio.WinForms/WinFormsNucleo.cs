@@ -45,18 +45,9 @@ namespace Estagio.WinForms
             RepositorioDoProduto.Instancia.Add(produto01);
             RepositorioDoProduto.Instancia.Add(produto02);
 
-            CrieColunasELinhasDoGrid();
+            CrieColunasELinhasDoDataGrid();
 
-            preenchaColunasDoDataGrid();
-        }
-
-        private void panelRight_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panelRight_Paint_1(object sender, PaintEventArgs e)
-        {
+            dataGridViewProduto.DataSource = bsDataGridProduto;
         }
 
         private void btnFechar_Click_1(object sender, EventArgs e)
@@ -64,12 +55,7 @@ namespace Estagio.WinForms
             this.Close();
         }
 
-        private void preenchaColunasDoDataGrid()
-        {
-            dataGridViewProduto.DataSource = bsDataGridProduto;
-        }
-
-        private void CrieColunasELinhasDoGrid()
+        private void CrieColunasELinhasDoDataGrid()
         {
             dataGridViewProduto.AutoGenerateColumns = false;
             dataGridViewProduto.AllowUserToDeleteRows = false;
@@ -101,14 +87,13 @@ namespace Estagio.WinForms
         protected override void OnShown(EventArgs e)
         {
             base.OnShown(e);
-
             bsDataGridProduto.DataSource = RepositorioDoProduto.Instancia.GetAll();
             bsDataGridProduto.ResetBindings(false);
         }
 
         private void tbTop_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
                 bsDataGridProduto.DataSource = RepositorioDoProduto.Instancia.GetAll().Where(p => p.Descricao.Contains(tbTop.Text) || p.Id.ToString() == tbTop.Text).ToList();
                 bsDataGridProduto.ResetBindings(false);
@@ -122,7 +107,7 @@ namespace Estagio.WinForms
             if (resultado == DialogResult.OK)
             {
                 OnShown(e);
-                dataGridViewProduto.Update();
+                //dataGridViewProduto.Refresh();
             }
         }
 
@@ -137,9 +122,19 @@ namespace Estagio.WinForms
             var frmCadastroDeProdutoEditar = new frmCadastroDeProdutoEditar();
             frmCadastroDeProdutoEditar.Produto = produtoSelecionado;
             var resultado = frmCadastroDeProdutoEditar.ShowDialog();
+            if (resultado == DialogResult.OK)
+            {
+                dataGridViewProduto.Refresh();
+            }
+        }
+
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
+            var resultado = MessageBox.Show("Tem Certeza que deseja excluir o produto?", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             if(resultado == DialogResult.OK)
             {
-                dataGridViewProduto.Update();
+                RepositorioDoProduto.Instancia.Delete((Produto)bsDataGridProduto.Current);
+                OnShown(e);
             }
         }
     }

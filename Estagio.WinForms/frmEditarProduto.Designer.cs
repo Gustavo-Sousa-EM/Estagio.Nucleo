@@ -63,6 +63,7 @@
             this.tbQtdeMinimaDeEsqoque.Name = "tbQtdeMinimaDeEsqoque";
             this.tbQtdeMinimaDeEsqoque.Size = new System.Drawing.Size(206, 20);
             this.tbQtdeMinimaDeEsqoque.TabIndex = 2;
+            this.tbQtdeMinimaDeEsqoque.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbQtdeMinimaDeEsqoque_KeyPress);
             // 
             // lbQtdeMinimaDeEstoque
             // 
@@ -90,6 +91,7 @@
             this.tbPrecoUnitario.Name = "tbPrecoUnitario";
             this.tbPrecoUnitario.Size = new System.Drawing.Size(155, 20);
             this.tbPrecoUnitario.TabIndex = 5;
+            this.tbPrecoUnitario.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPrecoUnitario_KeyPress);
             // 
             // flowLayoutPanel1
             // 
@@ -140,7 +142,7 @@
             this.btnCancelar.UseVisualStyleBackColor = false;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
-            // frmCadastroDeProduto
+            // frmCadastroDeProdutoEditar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -152,9 +154,10 @@
             this.Controls.Add(this.tbQtdeMinimaDeEsqoque);
             this.Controls.Add(this.lbDescricao);
             this.Controls.Add(this.tbDescricao);
-            this.Name = "frmCadastroDeProduto";
+            this.Name = "frmCadastroDeProdutoEditar";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "frmCadastroDeProduto";
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.frmCadastroDeProdutoEditar_MouseMove);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
