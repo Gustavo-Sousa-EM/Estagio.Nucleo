@@ -9,8 +9,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace Estagio.Nucleo
 {
+    using Estagio.Nucleo;
     public partial class frmCadastroDeProdutoEditar : Form
     {
         public frmCadastroDeProdutoEditar()
@@ -85,27 +87,26 @@ namespace Estagio.Nucleo
 
         private void valideCamposNulosOuVazios()
         {
+            
             if ( String.IsNullOrWhiteSpace(tbDescricao.Text) || String.IsNullOrWhiteSpace(tbPrecoUnitario.Text) || String.IsNullOrWhiteSpace(tbQtdeMinimaDeEsqoque.Text))
             {
                 throw new Exception();
             }
         }
 
-        private void tbQtdeMinimaDeEsqoque_KeyDown(object sender, KeyEventArgs e)
-        {
-            //e.KeyCode == Keys.Separator
-        }
+     
 
         private void tbPrecoUnitario_Leave(object sender, EventArgs e)
         {
-            try
-            {
-                tbPrecoUnitario.Text = String.Format("{0:0.00}", Convert.ToDecimal(tbPrecoUnitario.Text));
-            }
-            catch (Exception)
-            {
+            tbPrecoUnitario.Text = tbPrecoUnitario.Text.formateStringEmDecimal();
+            //try
+            //{
+            //    tbPrecoUnitario.Text = String.Format("{0:0.00}", Convert.ToDecimal(tbPrecoUnitario.Text));
+            //}
+            //catch (Exception)
+            //{
 
-            }
+            //}
         }
     }
 }

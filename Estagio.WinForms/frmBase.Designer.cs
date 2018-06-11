@@ -1,6 +1,6 @@
 ﻿namespace Estagio.WinForms
 {
-    partial class WinFormsNucleo
+    partial class frmBase
     {
         /// <summary>
         /// Required designer variable.
@@ -29,47 +29,55 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.panelRight = new System.Windows.Forms.Panel();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.tbTop = new System.Windows.Forms.TextBox();
             this.flowLayoutPanelRight = new System.Windows.Forms.FlowLayoutPanel();
             this.btnNovo = new System.Windows.Forms.Button();
             this.btnEditar = new System.Windows.Forms.Button();
             this.btnExcluir = new System.Windows.Forms.Button();
             this.btnFechar = new System.Windows.Forms.Button();
-            this.dataGridViewProduto = new System.Windows.Forms.DataGridView();
-            this.bsDataGridProduto = new System.Windows.Forms.BindingSource(this.components);
-            this.tbTop = new System.Windows.Forms.TextBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panelRight.SuspendLayout();
-            this.flowLayoutPanelRight.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProduto)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsDataGridProduto)).BeginInit();
+            this.sslMessage = new System.Windows.Forms.StatusStrip();
+            this.bsDataGrid = new System.Windows.Forms.BindingSource(this.components);
+            this.dataGridView = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
+            this.flowLayoutPanelRight.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bsDataGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
-            // panelRight
+            // panel1
             // 
-            this.panelRight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(120)))), ((int)(((byte)(207)))));
-            this.panelRight.Controls.Add(this.flowLayoutPanelRight);
-            this.panelRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelRight.Location = new System.Drawing.Point(641, 39);
-            this.panelRight.Name = "panelRight";
-            this.panelRight.Size = new System.Drawing.Size(184, 553);
-            this.panelRight.TabIndex = 4;
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(120)))), ((int)(((byte)(207)))));
+            this.panel1.Controls.Add(this.tbTop);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(800, 39);
+            this.panel1.TabIndex = 4;
+            // 
+            // tbTop
+            // 
+            this.tbTop.Location = new System.Drawing.Point(4, 12);
+            this.tbTop.Name = "tbTop";
+            this.tbTop.Size = new System.Drawing.Size(619, 20);
+            this.tbTop.TabIndex = 0;
+            this.tbTop.Text = "Informe as iniciais do nome ou  Id!";
             // 
             // flowLayoutPanelRight
             // 
             this.flowLayoutPanelRight.AutoSize = true;
+            this.flowLayoutPanelRight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(120)))), ((int)(((byte)(207)))));
             this.flowLayoutPanelRight.Controls.Add(this.btnNovo);
             this.flowLayoutPanelRight.Controls.Add(this.btnEditar);
             this.flowLayoutPanelRight.Controls.Add(this.btnExcluir);
             this.flowLayoutPanelRight.Controls.Add(this.btnFechar);
-            this.flowLayoutPanelRight.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanelRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.flowLayoutPanelRight.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanelRight.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanelRight.Location = new System.Drawing.Point(621, 39);
             this.flowLayoutPanelRight.Name = "flowLayoutPanelRight";
-            this.flowLayoutPanelRight.Size = new System.Drawing.Size(184, 553);
-            this.flowLayoutPanelRight.TabIndex = 0;
+            this.flowLayoutPanelRight.Size = new System.Drawing.Size(179, 474);
+            this.flowLayoutPanelRight.TabIndex = 5;
             this.flowLayoutPanelRight.TabStop = true;
             // 
             // btnNovo
@@ -82,7 +90,7 @@
             this.btnNovo.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNovo.ForeColor = System.Drawing.Color.Black;
             this.btnNovo.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnNovo.Location = new System.Drawing.Point(8, 3);
+            this.btnNovo.Location = new System.Drawing.Point(3, 3);
             this.btnNovo.Name = "btnNovo";
             this.btnNovo.Size = new System.Drawing.Size(173, 52);
             this.btnNovo.TabIndex = 1;
@@ -101,7 +109,7 @@
             this.btnEditar.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEditar.ForeColor = System.Drawing.Color.Black;
             this.btnEditar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnEditar.Location = new System.Drawing.Point(8, 61);
+            this.btnEditar.Location = new System.Drawing.Point(3, 61);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(173, 52);
             this.btnEditar.TabIndex = 2;
@@ -119,13 +127,12 @@
             this.btnExcluir.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExcluir.ForeColor = System.Drawing.Color.Black;
             this.btnExcluir.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnExcluir.Location = new System.Drawing.Point(8, 119);
+            this.btnExcluir.Location = new System.Drawing.Point(3, 119);
             this.btnExcluir.Name = "btnExcluir";
             this.btnExcluir.Size = new System.Drawing.Size(173, 52);
             this.btnExcluir.TabIndex = 4;
             this.btnExcluir.Text = "E&xcluir";
             this.btnExcluir.UseVisualStyleBackColor = false;
-            this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
             // 
             // btnFechar
             // 
@@ -137,87 +144,76 @@
             this.btnFechar.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFechar.ForeColor = System.Drawing.Color.Black;
             this.btnFechar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnFechar.Location = new System.Drawing.Point(8, 177);
+            this.btnFechar.Location = new System.Drawing.Point(3, 177);
             this.btnFechar.Name = "btnFechar";
             this.btnFechar.Size = new System.Drawing.Size(173, 52);
             this.btnFechar.TabIndex = 3;
             this.btnFechar.Text = "&Fechar";
             this.btnFechar.UseVisualStyleBackColor = false;
-            this.btnFechar.Click += new System.EventHandler(this.btnFechar_Click_1);
+            this.btnFechar.Click += new System.EventHandler(this.btnFechar_Click);
             // 
-            // dataGridViewProduto
+            // sslMessage
             // 
-            this.dataGridViewProduto.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dataGridViewProduto.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridViewProduto.AutoGenerateColumns = false;
-            this.dataGridViewProduto.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridViewProduto.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dataGridViewProduto.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.dataGridViewProduto.ColumnHeadersHeight = 25;
-            this.dataGridViewProduto.DataSource = this.bsDataGridProduto;
-            this.dataGridViewProduto.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewProduto.Location = new System.Drawing.Point(0, 39);
-            this.dataGridViewProduto.Name = "dataGridViewProduto";
-            this.dataGridViewProduto.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewProduto.Size = new System.Drawing.Size(641, 553);
-            this.dataGridViewProduto.TabIndex = 5;
+            this.sslMessage.Location = new System.Drawing.Point(0, 491);
+            this.sslMessage.Name = "sslMessage";
+            this.sslMessage.Size = new System.Drawing.Size(621, 22);
+            this.sslMessage.TabIndex = 7;
+            this.sslMessage.Text = "ssl";
             // 
-            // tbTop
+            // bsDataGrid
             // 
-            this.tbTop.Location = new System.Drawing.Point(4, 12);
-            this.tbTop.Name = "tbTop";
-            this.tbTop.Size = new System.Drawing.Size(637, 20);
-            this.tbTop.TabIndex = 0;
-            this.tbTop.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbTop_KeyDown);
+            this.bsDataGrid.CurrentChanged += new System.EventHandler(this.frmBase_Load);
             // 
-            // panel1
+            // dataGridView
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(120)))), ((int)(((byte)(207)))));
-            this.panel1.Controls.Add(this.tbTop);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(825, 39);
-            this.panel1.TabIndex = 3;
+            this.dataGridView.AllowUserToOrderColumns = true;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridView.AutoGenerateColumns = false;
+            this.dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dataGridView.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dataGridView.ColumnHeadersHeight = 25;
+            this.dataGridView.DataSource = this.bsDataGrid;
+            this.dataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView.Location = new System.Drawing.Point(0, 39);
+            this.dataGridView.Name = "dataGridView";
+            this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView.Size = new System.Drawing.Size(621, 452);
+            this.dataGridView.TabIndex = 8;
             // 
-            // WinFormsNucleo
+            // frmBase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(120)))), ((int)(((byte)(207)))));
-            this.ClientSize = new System.Drawing.Size(825, 592);
-            this.Controls.Add(this.dataGridViewProduto);
-            this.Controls.Add(this.panelRight);
+            this.ClientSize = new System.Drawing.Size(800, 513);
+            this.Controls.Add(this.dataGridView);
+            this.Controls.Add(this.sslMessage);
+            this.Controls.Add(this.flowLayoutPanelRight);
             this.Controls.Add(this.panel1);
-            this.ForeColor = System.Drawing.Color.Black;
-            this.Name = "WinFormsNucleo";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "WinForms";
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.panelRight.ResumeLayout(false);
-            this.panelRight.PerformLayout();
-            this.flowLayoutPanelRight.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProduto)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsDataGridProduto)).EndInit();
+            this.Name = "frmBase";
+            this.Text = "Controle de Estoque";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.flowLayoutPanelRight.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.bsDataGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Panel panelRight;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelRight;
-        private System.Windows.Forms.Button btnFechar;
-        private System.Windows.Forms.Button btnExcluir;
-        private System.Windows.Forms.Button btnEditar;
-        private System.Windows.Forms.Button btnNovo;
-        private System.Windows.Forms.DataGridView dataGridViewProduto;
-        private System.Windows.Forms.BindingSource bsDataGridProduto;
-        private System.Windows.Forms.TextBox tbTop;
+
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TextBox tbTop;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelRight;
+        private System.Windows.Forms.Button btnNovo;
+        private System.Windows.Forms.Button btnEditar;
+        private System.Windows.Forms.Button btnExcluir;
+        private System.Windows.Forms.Button btnFechar;
+        protected System.Windows.Forms.BindingSource bsDataGrid;
+        protected System.Windows.Forms.StatusStrip sslMessage;
+        protected System.Windows.Forms.DataGridView dataGridView;
     }
 }
-

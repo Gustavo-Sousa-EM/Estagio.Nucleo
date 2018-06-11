@@ -63,7 +63,6 @@
             this.tbQtdeMinimaDeEsqoque.Name = "tbQtdeMinimaDeEsqoque";
             this.tbQtdeMinimaDeEsqoque.Size = new System.Drawing.Size(206, 20);
             this.tbQtdeMinimaDeEsqoque.TabIndex = 2;
-            this.tbQtdeMinimaDeEsqoque.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbQtdeMinimaDeEsqoque_KeyDown);
             this.tbQtdeMinimaDeEsqoque.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbQtdeMinimaDeEsqoque_KeyPress);
             // 
             // lbQtdeMinimaDeEstoque
