@@ -12,10 +12,11 @@ namespace Estagio.Nucleo
 {
     public partial class frmCadastroDeProduto : Form
     {
-        Produto novoProduto = new Produto();
+        private Produto novoProduto = new Produto();
         public frmCadastroDeProduto()
         {
             InitializeComponent();
+            tbDescricao.MaxLength = 50;
         }
 
 
@@ -27,28 +28,26 @@ namespace Estagio.Nucleo
         private void InsiraAtributosDeProduto()
         {
             
-                novoProduto.Id = Convert.ToInt32(Repositorios.RepositorioDoProduto.Instancia.GetAll().Count().ToString()) + 1;
-                novoProduto.Descricao = tbDescricao.Text;
-                novoProduto.PrecoUnitario = Convert.ToDecimal(tbPrecoUnitario.Text);
-                novoProduto.QuantidadeMinimaEstoque = int.Parse(tbQtdeMinimaDeEsqoque.Text);
-            
-            
-                MessageBox.Show("Campos vazios!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            
-            
-            
-
+            novoProduto.Id = Convert.ToInt32(Repositorios.RepositorioDoProduto.Instancia.GetAll().Count().ToString()) + 1;
+            novoProduto.Descricao = tbDescricao.Text;
+            novoProduto.PrecoUnitario = Convert.ToDecimal(tbPrecoUnitario.Text);
+            novoProduto.QuantidadeMinimaEstoque = int.Parse(tbQtdeMinimaDeEstoque.Text);
         }
 
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
-            
+            try
+            {
+                valideCamposNulosOuVazios();
                 InsiraAtributosDeProduto();
                 Repositorios.RepositorioDoProduto.Instancia.Add(novoProduto);
                 DialogResult = DialogResult.OK;
-                MessageBox.Show("Produto Cadastrado");
-          
-            
+                MessageBox.Show("Produto Cadastrado", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Campos vazios!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -56,16 +55,16 @@ namespace Estagio.Nucleo
             DialogResult = DialogResult.Cancel;
             Close();
         }
-
         private void tbPrecoUnitario_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsNumber(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != 46 && e.KeyChar != 44)
+            var teclaBackSpace = 8;
+            var teclaVirgula = 44;
+            if (!char.IsNumber(e.KeyChar) && e.KeyChar != teclaBackSpace && e.KeyChar != teclaVirgula)
             {
                 e.Handled = true;
             }
 
         }
-
         private void tbQtdeMinimaDeEsqoque_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsNumber(e.KeyChar) && e.KeyChar != 8)
@@ -73,16 +72,15 @@ namespace Estagio.Nucleo
                 e.Handled = true;
             }
         }
-
-        private void tbPrecoUnitario_KeyPress_1(object sender, KeyPressEventArgs e)
+        private void valideCamposNulosOuVazios()
         {
-            if (!char.IsNumber(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != 44)
+            if (String.IsNullOrWhiteSpace(tbDescricao.Text) || String.IsNullOrWhiteSpace(tbPrecoUnitario.Text) || String.IsNullOrWhiteSpace(tbQtdeMinimaDeEstoque.Text))
             {
-                e.Handled = true;
+                throw new Exception();
             }
         }
 
-        private void frmCadastroDeProduto_MouseMove_1(object sender, MouseEventArgs e)
+        private void tbPrecoUnitario_Leave(object sender, EventArgs e)
         {
             try
             {

@@ -38,7 +38,7 @@ namespace Estagio.Nucleo.Repositorios
         }
         public IEnumerable<Produto> GetAll()
         {
-            return _produtos;
+            return _produtos.Select(p => (Produto)p.CloneProduto());
         }
 
         public Produto GetById(int id)

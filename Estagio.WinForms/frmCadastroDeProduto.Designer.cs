@@ -30,7 +30,7 @@
         {
             this.tbDescricao = new System.Windows.Forms.TextBox();
             this.lbDescricao = new System.Windows.Forms.Label();
-            this.tbQtdeMinimaDeEsqoque = new System.Windows.Forms.TextBox();
+            this.tbQtdeMinimaDeEstoque = new System.Windows.Forms.TextBox();
             this.lbQtdeMinimaDeEstoque = new System.Windows.Forms.Label();
             this.lbPrecoUnitario = new System.Windows.Forms.Label();
             this.tbPrecoUnitario = new System.Windows.Forms.TextBox();
@@ -57,13 +57,13 @@
             this.lbDescricao.TabIndex = 1;
             this.lbDescricao.Text = "Descrição:";
             // 
-            // tbQtdeMinimaDeEsqoque
+            // tbQtdeMinimaDeEstoque
             // 
-            this.tbQtdeMinimaDeEsqoque.Location = new System.Drawing.Point(36, 115);
-            this.tbQtdeMinimaDeEsqoque.Name = "tbQtdeMinimaDeEsqoque";
-            this.tbQtdeMinimaDeEsqoque.Size = new System.Drawing.Size(206, 20);
-            this.tbQtdeMinimaDeEsqoque.TabIndex = 2;
-            this.tbQtdeMinimaDeEsqoque.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbQtdeMinimaDeEsqoque_KeyPress);
+            this.tbQtdeMinimaDeEstoque.Location = new System.Drawing.Point(36, 115);
+            this.tbQtdeMinimaDeEstoque.Name = "tbQtdeMinimaDeEstoque";
+            this.tbQtdeMinimaDeEstoque.Size = new System.Drawing.Size(206, 20);
+            this.tbQtdeMinimaDeEstoque.TabIndex = 2;
+            this.tbQtdeMinimaDeEstoque.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbQtdeMinimaDeEsqoque_KeyPress);
             // 
             // lbQtdeMinimaDeEstoque
             // 
@@ -91,7 +91,7 @@
             this.tbPrecoUnitario.Name = "tbPrecoUnitario";
             this.tbPrecoUnitario.Size = new System.Drawing.Size(155, 20);
             this.tbPrecoUnitario.TabIndex = 5;
-            this.tbPrecoUnitario.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPrecoUnitario_KeyPress_1);
+            this.tbPrecoUnitario.Leave += new System.EventHandler(this.tbPrecoUnitario_Leave);
             // 
             // flowLayoutPanel1
             // 
@@ -150,13 +150,12 @@
             this.Controls.Add(this.tbPrecoUnitario);
             this.Controls.Add(this.lbPrecoUnitario);
             this.Controls.Add(this.lbQtdeMinimaDeEstoque);
-            this.Controls.Add(this.tbQtdeMinimaDeEsqoque);
+            this.Controls.Add(this.tbQtdeMinimaDeEstoque);
             this.Controls.Add(this.lbDescricao);
             this.Controls.Add(this.tbDescricao);
             this.Name = "frmCadastroDeProduto";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "frmCadastroDeProduto";
-            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.frmCadastroDeProduto_MouseMove_1);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -167,7 +166,7 @@
 
         private System.Windows.Forms.TextBox tbDescricao;
         private System.Windows.Forms.Label lbDescricao;
-        private System.Windows.Forms.TextBox tbQtdeMinimaDeEsqoque;
+        private System.Windows.Forms.TextBox tbQtdeMinimaDeEstoque;
         private System.Windows.Forms.Label lbQtdeMinimaDeEstoque;
         private System.Windows.Forms.Label lbPrecoUnitario;
         private System.Windows.Forms.TextBox tbPrecoUnitario;

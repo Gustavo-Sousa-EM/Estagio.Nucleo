@@ -90,9 +90,10 @@ namespace Estagio.WinForms
             bsDataGridProduto.DataSource = RepositorioDoProduto.Instancia.GetAll();
             bsDataGridProduto.ResetBindings(false);
         }
-
+        
         private void tbTop_KeyDown(object sender, KeyEventArgs e)
         {
+            tbTop.MaxLength = 100;
             if (e.KeyCode == Keys.Enter)
             {
                 bsDataGridProduto.DataSource = RepositorioDoProduto.Instancia.GetAll().Where(p => p.Descricao.Contains(tbTop.Text) || p.Id.ToString() == tbTop.Text).ToList();
@@ -130,13 +131,14 @@ namespace Estagio.WinForms
 
         private void btnExcluir_Click(object sender, EventArgs e)
         {
-            var resultado = MessageBox.Show("Tem Certeza que deseja excluir o produto?", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            if(resultado == DialogResult.OK)
+            var resultado = MessageBox.Show("Tem Certeza que deseja excluir o produto?", "Atenção", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if(resultado == DialogResult.Yes)
             {
                 RepositorioDoProduto.Instancia.Delete((Produto)bsDataGridProduto.Current);
                 OnShown(e);
             }
         }
+        
     }
 
 }

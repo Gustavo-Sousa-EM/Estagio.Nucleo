@@ -63,6 +63,7 @@
             this.tbQtdeMinimaDeEsqoque.Name = "tbQtdeMinimaDeEsqoque";
             this.tbQtdeMinimaDeEsqoque.Size = new System.Drawing.Size(206, 20);
             this.tbQtdeMinimaDeEsqoque.TabIndex = 2;
+            this.tbQtdeMinimaDeEsqoque.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbQtdeMinimaDeEsqoque_KeyDown);
             this.tbQtdeMinimaDeEsqoque.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbQtdeMinimaDeEsqoque_KeyPress);
             // 
             // lbQtdeMinimaDeEstoque
@@ -92,6 +93,7 @@
             this.tbPrecoUnitario.Size = new System.Drawing.Size(155, 20);
             this.tbPrecoUnitario.TabIndex = 5;
             this.tbPrecoUnitario.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPrecoUnitario_KeyPress);
+            this.tbPrecoUnitario.Leave += new System.EventHandler(this.tbPrecoUnitario_Leave);
             // 
             // flowLayoutPanel1
             // 
@@ -157,7 +159,6 @@
             this.Name = "frmCadastroDeProdutoEditar";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "frmCadastroDeProduto";
-            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.frmCadastroDeProdutoEditar_MouseMove);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -16,6 +16,7 @@ namespace Estagio.Nucleo
         public frmCadastroDeProdutoEditar()
         {
             InitializeComponent();
+            tbDescricao.MaxLength = 50;
         }
 
         public Produto Produto { get; set; }
@@ -34,10 +35,19 @@ namespace Estagio.Nucleo
         }
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
-            AtualizeAtributosDeProduto();
-            Repositorios.RepositorioDoProduto.Instancia.Update(Produto);
-            DialogResult = DialogResult.OK;
-            MessageBox.Show("Produto Cadastrado");
+            try
+            {
+                valideCamposNulosOuVazios();
+                AtualizeAtributosDeProduto();
+                Repositorios.RepositorioDoProduto.Instancia.Update(Produto);
+                DialogResult = DialogResult.OK;
+                MessageBox.Show("Produto Editado!");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Campos vazios!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            
         }
 
         private void AtualizeAtributosDeProduto()
@@ -56,7 +66,9 @@ namespace Estagio.Nucleo
 
         private void tbPrecoUnitario_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsNumber(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != 46 && e.KeyChar != 44)
+            var teclaBackSpace = 8;
+            var teclaVirgula = 44;
+            if (!char.IsNumber(e.KeyChar) && e.KeyChar != teclaBackSpace && e.KeyChar != teclaVirgula)
             {
                 e.Handled = true;
             }
@@ -71,7 +83,20 @@ namespace Estagio.Nucleo
             }
         }
 
-        private void frmCadastroDeProdutoEditar_MouseMove(object sender, MouseEventArgs e)
+        private void valideCamposNulosOuVazios()
+        {
+            if ( String.IsNullOrWhiteSpace(tbDescricao.Text) || String.IsNullOrWhiteSpace(tbPrecoUnitario.Text) || String.IsNullOrWhiteSpace(tbQtdeMinimaDeEsqoque.Text))
+            {
+                throw new Exception();
+            }
+        }
+
+        private void tbQtdeMinimaDeEsqoque_KeyDown(object sender, KeyEventArgs e)
+        {
+            //e.KeyCode == Keys.Separator
+        }
+
+        private void tbPrecoUnitario_Leave(object sender, EventArgs e)
         {
             try
             {
