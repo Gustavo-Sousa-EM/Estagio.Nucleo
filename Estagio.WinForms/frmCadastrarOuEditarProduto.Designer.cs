@@ -106,6 +106,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Name = "frmCadastrarOuEditarProduto";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "frmCadastrarOuEditarProduto";
             this.pnlConteudo.ResumeLayout(false);
             this.pnlConteudo.PerformLayout();

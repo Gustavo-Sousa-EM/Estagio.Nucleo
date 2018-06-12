@@ -1,6 +1,6 @@
 ﻿namespace Estagio.WinForms
 {
-    partial class frmBaseCadastrarOuEditar
+    partial class FrmBaseCadastrarOuEditar
     {
         /// <summary>
         /// Required designer variable.

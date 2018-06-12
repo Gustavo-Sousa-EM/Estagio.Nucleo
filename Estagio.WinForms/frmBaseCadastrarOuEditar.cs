@@ -10,17 +10,15 @@ using System.Windows.Forms;
 
 namespace Estagio.WinForms
 {
-    public partial class frmBaseCadastrarOuEditar : frmBase
+    public abstract partial class FrmBaseCadastrarOuEditar : frmBase
     {
-        public frmBaseCadastrarOuEditar()
+        public FrmBaseCadastrarOuEditar()
         {
             InitializeComponent();
         }
 
-        protected virtual void btnConfirmar_Click(object sender, EventArgs e)
-        {
-        }
-
+        public abstract void btnConfirmar_Click(object sender, EventArgs e);
+        
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
@@ -28,6 +26,7 @@ namespace Estagio.WinForms
             this.Close();
         }
 
+        
         
     }
 }
