@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Estagio.Nucleo
 {
@@ -29,7 +30,9 @@ namespace Estagio.Nucleo
             return Descricao;
         }
 
-       
+        public class frmEditarProduto : Form
+        {
+        }
     }
 
 

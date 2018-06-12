@@ -46,53 +46,53 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="frmAterrissagemProduto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAterrissagemProduto.Designer.cs">
+      <DependentUpon>frmAterrissagemProduto.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmBase.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmBase.Designer.cs">
       <DependentUpon>frmBase.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmBaseEditarCadastrar.cs">
+    <Compile Include="frmBaseAterrissagem.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmBaseEditarCadastrar.Designer.cs">
-      <DependentUpon>frmBaseEditarCadastrar.cs</DependentUpon>
+    <Compile Include="frmBaseAterrissagem.Designer.cs">
+      <DependentUpon>frmBaseAterrissagem.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmCadastroDeProduto.cs">
+    <Compile Include="frmBaseCadastrarOuEditar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmCadastroDeProduto.Designer.cs">
-      <DependentUpon>frmCadastroDeProduto.cs</DependentUpon>
+    <Compile Include="frmBaseCadastrarOuEditar.Designer.cs">
+      <DependentUpon>frmBaseCadastrarOuEditar.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmEditarProduto.cs">
+    <Compile Include="frmCadastrarOuEditarProduto.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmEditarProduto.Designer.cs">
-      <DependentUpon>frmEditarProduto.cs</DependentUpon>
+    <Compile Include="frmCadastrarOuEditarProduto.Designer.cs">
+      <DependentUpon>frmCadastrarOuEditarProduto.cs</DependentUpon>
     </Compile>
     <Compile Include="ValidacaoDeCampos.cs" />
-    <Compile Include="frmAterrissagem.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmAterrissagem.Designer.cs">
-      <DependentUpon>frmAterrissagem.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmAterrissagemProduto.resx">
+      <DependentUpon>frmAterrissagemProduto.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmBase.resx">
       <DependentUpon>frmBase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmBaseEditarCadastrar.resx">
-      <DependentUpon>frmBaseEditarCadastrar.cs</DependentUpon>
+    <EmbeddedResource Include="frmBaseAterrissagem.resx">
+      <DependentUpon>frmBaseAterrissagem.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmCadastroDeProduto.resx">
-      <DependentUpon>frmCadastroDeProduto.cs</DependentUpon>
+    <EmbeddedResource Include="frmBaseCadastrarOuEditar.resx">
+      <DependentUpon>frmBaseCadastrarOuEditar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmEditarProduto.resx">
-      <DependentUpon>frmEditarProduto.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmAterrissagem.resx">
-      <DependentUpon>frmAterrissagem.cs</DependentUpon>
+    <EmbeddedResource Include="frmCadastrarOuEditarProduto.resx">
+      <DependentUpon>frmCadastrarOuEditarProduto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -102,6 +102,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -121,6 +122,9 @@
       <Project>{0791d72b-33b3-4233-bdf7-b2b76c1a7f88}</Project>
       <Name>Estagio.Nucleo</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DC3FA890-5056-B759-7AC6985D1D2AFFDD-logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
