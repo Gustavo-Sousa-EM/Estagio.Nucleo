@@ -14,40 +14,58 @@ namespace Estagio.WinForms
     public partial class frmBaseAterrissagem : frmBase
     {
         public Object objeto { get; set; }
+
+
         public frmBaseAterrissagem()
         {
             InitializeComponent();
         }
 
+
         private void frmBaseAterrissagem_Load(object sender, EventArgs e)
         {
             CrieColunasELinhasDoDataGrid();
         }
-
-
-        protected virtual void CrieColunasELinhasDoDataGrid()
+        private void CrieColunasELinhasDoDataGrid()
         {
             dgvProdutos.Columns.Add(new DataGridViewTextBoxColumn
             {
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
                 Width = 100,
-                DataPropertyName = nameof(objeto),
-                Name = nameof(objeto)
+                DataPropertyName = Convert.ToString(AdquiraNomeDaPrimeiraColuna()),
+                Name = Convert.ToString(AdquiraNomeDaPrimeiraColuna())
             });
 
             dgvProdutos.Columns.Add(new DataGridViewTextBoxColumn
             {
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
                 Width = 100,
-                DataPropertyName = nameof(objeto),
-                Name = nameof(objeto)
+                DataPropertyName = Convert.ToString(AdquiraNomeDaSegundaColuna()),
+                Name = Convert.ToString(AdquiraNomeDaSegundaColuna())
             });
         }
 
-        protected virtual Object selecionaProduto()
+        protected virtual object AdquiraNomeDaPrimeiraColuna()
+        {
+            return new Object();
+        }
+        protected virtual object AdquiraNomeDaSegundaColuna()
+        {
+            return new Object();
+        }
+        
+
+
+        protected virtual Object selecioneProduto()
         {
             return bsDgvProdutos.Current;
         }
+        protected virtual Form InicializeFrmComObjeto(Object objeto)
+        {
+            return new Form();
+        }
+
+
 
         private void btnNovo_Click(object sender, EventArgs e)
         {
@@ -61,26 +79,19 @@ namespace Estagio.WinForms
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            var produtoSelecionado = selecionaProduto();
+            var produtoSelecionado = selecioneProduto();
             if (produtoSelecionado == null)
             {
-                MessageBox.Show("Algo");
+                MessageBox.Show("Selecione um Produto!");
                 return;
             }
-            var frmEditarProduto = InicializeFrmComObjeto(selecionaProduto());
-
-            InicializeFrmComObjeto(selecionaProduto());
+            var frmEditarProduto = InicializeFrmComObjeto(selecioneProduto());
             var resultado = frmEditarProduto.ShowDialog();
             if (resultado == DialogResult.OK)
             {
                 OnShown(e);
             }
         }
-        protected virtual Form InicializeFrmComObjeto(Object objeto)
-        {
-            return new Form();
-        }
-
 
         private void btnExcluir_Click(object sender, EventArgs e)
         {
@@ -90,6 +101,7 @@ namespace Estagio.WinForms
                 var produtoSelecionado = bsDgvProdutos.Current;
                 if (resultado == DialogResult.Yes)
                 {
+                    excluaProduto();
                     OnShown(e);
                 }
             }
@@ -99,6 +111,11 @@ namespace Estagio.WinForms
                 return;
             }
         }
+        protected virtual void excluaProduto()
+        {
+            throw new Exception();
+        }
+       
 
         private void btnFechar_Click(object sender, EventArgs e)
         {

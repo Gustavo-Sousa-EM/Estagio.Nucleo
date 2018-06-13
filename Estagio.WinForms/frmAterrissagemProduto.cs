@@ -53,37 +53,37 @@ namespace Estagio.WinForms
             bsDgvProdutos.ResetBindings(true);
         }
 
-        protected override void CrieColunasELinhasDoDataGrid()
-        {
-            dgvProdutos.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
-                Width = 100,
-                DataPropertyName = nameof(Produto.Id),
-                HeaderText = "ID",
-                Name = nameof(Produto.Id)
-            });
 
-            dgvProdutos.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
-                Width = 100,
-                DataPropertyName = nameof(Produto.Descricao),
-                HeaderText = "Descrição",
-                Name = nameof(Produto.Descricao)
-            });
+        protected override object AdquiraNomeDaPrimeiraColuna()
+        {
+            return nameof(Produto.Id);
         }
+
+        protected override object AdquiraNomeDaSegundaColuna()
+        {
+            return nameof(Produto.Descricao);
+        }
+
 
         protected override Form InicializeFrmComObjeto(Object objeto)
         {
-            if(objeto == null)
+            var frmComProduto = new frmCadastrarOuEditarProduto();
+            if (objeto == null)
             {
-                return new frmCadastrarOuEditarProduto(new Produto());
+                frmComProduto.novoProduto = new Produto();
             }
-            return new frmCadastrarOuEditarProduto((Produto)objeto);
+            else
+            {
+                frmComProduto.novoProduto = (Produto)selecioneProduto();
+            }
+            return frmComProduto;
         }
 
 
+        protected override void excluaProduto()
+        {
+            RepositorioDoProduto.Instancia.Delete((Produto)selecioneProduto());
+        }
 
 
 

@@ -13,27 +13,38 @@ namespace Estagio.WinForms
 {
     public partial class frmCadastrarOuEditarProduto : FrmBaseCadastrarOuEditar
     {
-        private Produto novoProduto { get; set; }
-        public frmCadastrarOuEditarProduto(Produto produto)
+        public Produto novoProduto { get; set; }
+
+
+        public frmCadastrarOuEditarProduto(/*Produto produto*/)
         {
 
             InitializeComponent();
-            PreenchaTableBoxDoFormulario(produto);
+            //PreenchaTableBoxDoFormulario(produto);
         }
 
-        private void PreenchaTableBoxDoFormulario(Produto produto)
+        protected override void OnShown(EventArgs e)
         {
-            if (produto != null)
+            if (novoProduto != null)
             {
-                novoProduto = produto;
                 tbDescricao.Text = novoProduto.Descricao;
                 tbPrecoUnitario.Text = novoProduto.PrecoUnitario.ToString();
                 tbQtdeMinima.Text = novoProduto.QuantidadeMinimaEstoque.ToString();
+                base.OnShown(e);
             }
         }
 
+        //private void PreenchaTableBoxDoFormulario(Produto produto)
+        //{
+            
+        //        novoProduto = produto;
+               
+            
+        //}
 
-        public override void btnConfirmar_Click(object sender, EventArgs e)
+
+        
+        protected override void btnConfirmar_Click(object sender, EventArgs e)
         {
             try
             {
@@ -44,6 +55,7 @@ namespace Estagio.WinForms
                     insiraAtributosDeProduto();
                     Nucleo.Repositorios.RepositorioDoProduto.Instancia.Add(novoProduto);
                     MessageBox.Show("Produto Cadastrado!", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    DialogResult = DialogResult.OK;
                 }
                 else
                 {
@@ -58,6 +70,8 @@ namespace Estagio.WinForms
                 MessageBox.Show("Campos vazios!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
+
 
         private void InsiraNovoId()
         {
@@ -82,6 +96,8 @@ namespace Estagio.WinForms
             ValidacaoDeCampos.CampoEhVazioOuNulo(tbDescricao.Text);
             ValidacaoDeCampos.CampoEhVazioOuNulo(tbQtdeMinima.Text);
         }
+
+
 
         private void tbPrecoUnitario_KeyPress(object sender, KeyPressEventArgs e)
         {
