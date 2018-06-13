@@ -20,6 +20,7 @@ namespace Estagio.WinForms
         public frmCadastrarOuEditarProduto()
         {
             InitializeComponent();
+            txtDescricao.f
             txtPrecoUnitario.FormatoMonetario();
             txtQuantidadeMinima.FormatoInteiro();
         }
@@ -69,6 +70,8 @@ namespace Estagio.WinForms
             if (!FoiInformadoOCampo(txtQuantidadeMinima, "Informe a quantidade unitária")) return false;
             return true;
         }
+
+       
 
 
 

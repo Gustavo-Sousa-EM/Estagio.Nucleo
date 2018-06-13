@@ -20,15 +20,17 @@ namespace Estagio.Nucleo.Repositorios
 
         public void Add(Produto item)
         {
-
+            if(item.Id == 0)
+            {
+                item.Id = GetAllId() + 1;
+                _produtos.Add(item);
+                return;
+            }
             if (_produtos.Contains(GetById(item.Id)))
             {
                 throw new ApplicationException("Produto ja existe!");
             }
-            else
-            {
-                _produtos.Add(item);
-            }
+            _produtos.Add(item);
         }
 
         public void Delete(Produto item)
@@ -52,6 +54,10 @@ namespace Estagio.Nucleo.Repositorios
 
         public void Update(Produto item)
         {
+            if (!_produtos.Contains(GetById(item.Id)))
+            {
+                throw new ApplicationException("Produto não existe!");
+            }
             Delete(item);
             _produtosDeletados.Remove(item);
             _produtos.Add(item);

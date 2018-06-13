@@ -28,32 +28,9 @@ namespace Estagio.WinForms
         }
 
         //
-        private void CrieColunasELinhasDoDataGrid()
+        protected virtual void CrieColunasELinhasDoDataGrid()
         {
-            dgvProdutos.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
-                Width = 100,
-                DataPropertyName = Convert.ToString(AdquiraNomeDaPrimeiraColuna()),
-                Name = Convert.ToString(AdquiraNomeDaPrimeiraColuna())
-            });
-
-            dgvProdutos.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
-                Width = 100,
-                DataPropertyName = Convert.ToString(AdquiraNomeDaSegundaColuna()),
-                Name = Convert.ToString(AdquiraNomeDaSegundaColuna())
-            });
-        }
-
-        protected virtual object AdquiraNomeDaPrimeiraColuna()
-        {
-            return new object();
-        }
-        protected virtual object AdquiraNomeDaSegundaColuna()
-        {
-            return new object();
+            throw new NotImplementedException();
         }
 
 
@@ -65,7 +42,7 @@ namespace Estagio.WinForms
 
         protected virtual Form CrieFormulario(object objeto)
         {
-            return new Form();
+            throw new NotImplementedException();
         }
 
 
@@ -80,23 +57,29 @@ namespace Estagio.WinForms
             }
         }
 
-        private void AtualizeTelaDeAterrissagem()
+        protected virtual void AtualizeTelaDeAterrissagem()
         {
-            
+            throw new NotImplementedException();
         }
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            var produtoSelecionado = ObtenhaProdutoSelecionado();
-            if (produtoSelecionado == null)
+            try
             {
-                MessageBox.Show("Selecione um Produto!");
-                return;
+                var produtoSelecionado = ObtenhaProdutoSelecionado();
+                if (produtoSelecionado != null)
+                {
+                    var frmEditarProduto = CrieFormulario(ObtenhaProdutoSelecionado());
+                    var resultado = frmEditarProduto.ShowDialog();
+                    if (resultado == DialogResult.OK)
+                    {
+                        AtualizeTelaDeAterrissagem();
+                    }
+                }
             }
-            var frmEditarProduto = CrieFormulario(ObtenhaProdutoSelecionado());
-            var resultado = frmEditarProduto.ShowDialog();
-            if (resultado == DialogResult.OK)
+            catch(Exception)
             {
+                MessageBox.Show("Não é Possível editar um produto inexistente!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -119,7 +102,7 @@ namespace Estagio.WinForms
         }
         protected virtual void excluaProduto()
         {
-            throw new Exception();
+            throw new NotImplementedException();
         }
 
 

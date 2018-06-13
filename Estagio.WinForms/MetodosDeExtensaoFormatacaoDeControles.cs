@@ -15,6 +15,20 @@ namespace Estagio.Nucleo
             textbox.KeyPress += FormatoDecimal_KeyPress;
         }
 
+        //private static void FormatoMonetario(this TextBox textbox, object sender, KeyPressEventArgs e)
+        //{
+        //    try
+        //    {
+        //        textbox.Leave += Convert.ToDecimal(sender).ToString("0.00");
+
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //    }
+           
+        //}
+
         public static void FormatoInteiro(this TextBox textbox)
         {
             textbox.TextAlign = HorizontalAlignment.Right;
