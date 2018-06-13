@@ -74,22 +74,15 @@ namespace Estagio.WinForms
             });
         }
 
-        protected override object selecionaProduto()
+        protected override Form InicializeFrmComObjeto(Object objeto)
         {
-            return bsDgvProdutos.Current;
+            if(objeto == null)
+            {
+                return new frmCadastrarOuEditarProduto(new Produto());
+            }
+            return new frmCadastrarOuEditarProduto((Produto)objeto);
         }
 
-        
-
-        protected override Form InicializeFrmComObjeto()
-        {
-            return new frmCadastrarOuEditarProduto((Produto)selecionaProduto());
-        }
-
-        protected override Form inicializeFrmNulo()
-        {
-            return new frmCadastrarOuEditarProduto(new Produto());
-        }
 
 
 

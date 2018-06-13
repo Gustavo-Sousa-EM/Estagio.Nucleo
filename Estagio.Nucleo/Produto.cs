@@ -30,9 +30,6 @@ namespace Estagio.Nucleo
             return Descricao;
         }
 
-        public class frmEditarProduto : Form
-        {
-        }
     }
 
 

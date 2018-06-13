@@ -13,6 +13,7 @@ namespace Estagio.WinForms
 {
     public partial class frmBaseAterrissagem : frmBase
     {
+        public Object objeto { get; set; }
         public frmBaseAterrissagem()
         {
             InitializeComponent();
@@ -30,16 +31,16 @@ namespace Estagio.WinForms
             {
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
                 Width = 100,
-                DataPropertyName = nameof(Object),
-                Name = nameof(Object)
+                DataPropertyName = nameof(objeto),
+                Name = nameof(objeto)
             });
 
             dgvProdutos.Columns.Add(new DataGridViewTextBoxColumn
             {
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
                 Width = 100,
-                DataPropertyName = nameof(Object),
-                Name = nameof(Object)
+                DataPropertyName = nameof(objeto),
+                Name = nameof(objeto)
             });
         }
 
@@ -50,19 +51,13 @@ namespace Estagio.WinForms
 
         private void btnNovo_Click(object sender, EventArgs e)
         {
-            var frmCadastroDeProduto = inicializeFrmNulo();
+            var frmCadastroDeProduto = InicializeFrmComObjeto(objeto);
             var resultado = frmCadastroDeProduto.ShowDialog();
             if (resultado == DialogResult.OK)
             {
                 OnShown(e);
             }
         }
-        protected virtual Form inicializeFrmNulo()
-        {
-            return new Form();
-        }
-
-       
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
@@ -72,16 +67,16 @@ namespace Estagio.WinForms
                 MessageBox.Show("Algo");
                 return;
             }
-            var frmEditarProduto = InicializeFrmComObjeto();
+            var frmEditarProduto = InicializeFrmComObjeto(selecionaProduto());
 
-            InicializeFrmComObjeto();
+            InicializeFrmComObjeto(selecionaProduto());
             var resultado = frmEditarProduto.ShowDialog();
             if (resultado == DialogResult.OK)
             {
                 OnShown(e);
             }
         }
-        protected virtual Form InicializeFrmComObjeto()
+        protected virtual Form InicializeFrmComObjeto(Object objeto)
         {
             return new Form();
         }

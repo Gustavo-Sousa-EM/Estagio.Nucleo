@@ -16,7 +16,7 @@ namespace Estagio.WinForms
         private Produto novoProduto { get; set; }
         public frmCadastrarOuEditarProduto(Produto produto)
         {
-            produto = this.novoProduto;
+
             InitializeComponent();
             PreenchaTableBoxDoFormulario(produto);
         }
@@ -25,9 +25,10 @@ namespace Estagio.WinForms
         {
             if (produto != null)
             {
-                tbDescricao.Text = produto.Descricao;
-                tbPrecoUnitario.Text = produto.PrecoUnitario.ToString();
-                tbQtdeMinima.Text = produto.QuantidadeMinimaEstoque.ToString();
+                novoProduto = produto;
+                tbDescricao.Text = novoProduto.Descricao;
+                tbPrecoUnitario.Text = novoProduto.PrecoUnitario.ToString();
+                tbQtdeMinima.Text = novoProduto.QuantidadeMinimaEstoque.ToString();
             }
         }
 
@@ -39,12 +40,18 @@ namespace Estagio.WinForms
                 valideCamposNulosOuVazios();
                 if (EhNovoProduto())
                 {
-                    AdicioneNovoProduto();
+                    InsiraNovoId();
+                    insiraAtributosDeProduto();
+                    Nucleo.Repositorios.RepositorioDoProduto.Instancia.Add(novoProduto);
                     MessageBox.Show("Produto Cadastrado!", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
-                AtualizeProdutoExistente();
-                DialogResult = DialogResult.OK;
-                MessageBox.Show("Produto Atualizado!", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                else
+                {
+                    insiraAtributosDeProduto();
+                    Nucleo.Repositorios.RepositorioDoProduto.Instancia.Update(novoProduto);
+                    MessageBox.Show("Produto Atualizado!", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    DialogResult = DialogResult.OK;
+                }
             }
             catch (Exception)
             {
@@ -52,17 +59,16 @@ namespace Estagio.WinForms
             }
         }
 
-        private void AtualizeProdutoExistente()
-        {
-            insiraAtributosDeProduto();
-            Nucleo.Repositorios.RepositorioDoProduto.Instancia.Update(novoProduto);
-        }
-
-        private void AdicioneNovoProduto()
+        private void InsiraNovoId()
         {
             novoProduto.Id = Nucleo.Repositorios.RepositorioDoProduto.Instancia.GetAllId() + 1;
-            insiraAtributosDeProduto();
-            Nucleo.Repositorios.RepositorioDoProduto.Instancia.Add(novoProduto);
+        }
+
+        private void insiraAtributosDeProduto()
+        {
+            novoProduto.Descricao = tbDescricao.Text;
+            novoProduto.PrecoUnitario = Convert.ToDecimal(tbPrecoUnitario.Text);
+            novoProduto.QuantidadeMinimaEstoque = int.Parse(tbQtdeMinima.Text);
         }
 
         private bool EhNovoProduto()
@@ -75,13 +81,6 @@ namespace Estagio.WinForms
             ValidacaoDeCampos.CampoEhVazioOuNulo(tbPrecoUnitario.Text);
             ValidacaoDeCampos.CampoEhVazioOuNulo(tbDescricao.Text);
             ValidacaoDeCampos.CampoEhVazioOuNulo(tbQtdeMinima.Text);
-        }
-
-        private void insiraAtributosDeProduto()
-        {
-            novoProduto.Descricao = tbDescricao.Text;
-            novoProduto.PrecoUnitario = Convert.ToDecimal(tbPrecoUnitario.Text);
-            novoProduto.QuantidadeMinimaEstoque = int.Parse(tbQtdeMinima.Text);
         }
 
         private void tbPrecoUnitario_KeyPress(object sender, KeyPressEventArgs e)
