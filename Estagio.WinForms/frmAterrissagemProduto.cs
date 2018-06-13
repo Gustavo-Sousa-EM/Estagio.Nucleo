@@ -65,24 +65,17 @@ namespace Estagio.WinForms
         }
 
 
-        protected override Form InicializeFrmComObjeto(Object objeto)
+        protected override Form CrieFormulario(object objeto)
         {
             var frmComProduto = new frmCadastrarOuEditarProduto();
-            if (objeto == null)
-            {
-                frmComProduto.novoProduto = new Produto();
-            }
-            else
-            {
-                frmComProduto.novoProduto = (Produto)selecioneProduto();
-            }
+            frmComProduto.Produto = (Produto)objeto;
             return frmComProduto;
         }
 
 
         protected override void excluaProduto()
         {
-            RepositorioDoProduto.Instancia.Delete((Produto)selecioneProduto());
+            RepositorioDoProduto.Instancia.Delete((Produto)ObtenhaProdutoSelecionado());
         }
 
 

@@ -53,6 +53,7 @@ namespace Estagio.Nucleo.Repositorios
         public void Update(Produto item)
         {
             Delete(item);
+            _produtosDeletados.Remove(item);
             _produtos.Add(item);
 
         }

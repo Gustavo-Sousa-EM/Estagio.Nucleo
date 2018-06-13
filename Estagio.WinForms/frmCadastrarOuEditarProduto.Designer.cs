@@ -31,9 +31,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.tbPrecoUnitario = new System.Windows.Forms.TextBox();
-            this.tbQtdeMinima = new System.Windows.Forms.TextBox();
-            this.tbDescricao = new System.Windows.Forms.TextBox();
+            this.txtPrecoUnitario = new System.Windows.Forms.TextBox();
+            this.txtQuantidadeMinima = new System.Windows.Forms.TextBox();
+            this.txtDescricao = new System.Windows.Forms.TextBox();
             this.pnlConteudo.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,9 +42,9 @@
             this.pnlConteudo.Controls.Add(this.label1);
             this.pnlConteudo.Controls.Add(this.label2);
             this.pnlConteudo.Controls.Add(this.label3);
-            this.pnlConteudo.Controls.Add(this.tbPrecoUnitario);
-            this.pnlConteudo.Controls.Add(this.tbQtdeMinima);
-            this.pnlConteudo.Controls.Add(this.tbDescricao);
+            this.pnlConteudo.Controls.Add(this.txtPrecoUnitario);
+            this.pnlConteudo.Controls.Add(this.txtQuantidadeMinima);
+            this.pnlConteudo.Controls.Add(this.txtDescricao);
             // 
             // label1
             // 
@@ -76,29 +76,28 @@
             this.label3.TabIndex = 11;
             this.label3.Text = "Descrição:";
             // 
-            // tbPrecoUnitario
+            // txtPrecoUnitario
             // 
-            this.tbPrecoUnitario.Location = new System.Drawing.Point(329, 167);
-            this.tbPrecoUnitario.Name = "tbPrecoUnitario";
-            this.tbPrecoUnitario.Size = new System.Drawing.Size(179, 20);
-            this.tbPrecoUnitario.TabIndex = 10;
-            this.tbPrecoUnitario.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPrecoUnitario_KeyPress);
-            this.tbPrecoUnitario.Leave += new System.EventHandler(this.tbPrecoUnitario_Leave);
+            this.txtPrecoUnitario.Location = new System.Drawing.Point(329, 167);
+            this.txtPrecoUnitario.Name = "txtPrecoUnitario";
+            this.txtPrecoUnitario.Size = new System.Drawing.Size(179, 20);
+            this.txtPrecoUnitario.TabIndex = 10;
             // 
-            // tbQtdeMinima
+            // txtQuantidadeMinima
             // 
-            this.tbQtdeMinima.Location = new System.Drawing.Point(32, 167);
-            this.tbQtdeMinima.Name = "tbQtdeMinima";
-            this.tbQtdeMinima.Size = new System.Drawing.Size(261, 20);
-            this.tbQtdeMinima.TabIndex = 9;
-            this.tbQtdeMinima.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbQtdeMinima_KeyPress);
+            this.txtQuantidadeMinima.Location = new System.Drawing.Point(32, 167);
+            this.txtQuantidadeMinima.Name = "txtQuantidadeMinima";
+            this.txtQuantidadeMinima.Size = new System.Drawing.Size(261, 20);
+            this.txtQuantidadeMinima.TabIndex = 9;
             // 
-            // tbDescricao
+            // txtDescricao
             // 
-            this.tbDescricao.Location = new System.Drawing.Point(32, 58);
-            this.tbDescricao.Name = "tbDescricao";
-            this.tbDescricao.Size = new System.Drawing.Size(476, 20);
-            this.tbDescricao.TabIndex = 8;
+            this.txtDescricao.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtDescricao.Location = new System.Drawing.Point(32, 58);
+            this.txtDescricao.MaxLength = 100;
+            this.txtDescricao.Name = "txtDescricao";
+            this.txtDescricao.Size = new System.Drawing.Size(476, 20);
+            this.txtDescricao.TabIndex = 8;
             // 
             // frmCadastrarOuEditarProduto
             // 
@@ -120,8 +119,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox tbPrecoUnitario;
-        private System.Windows.Forms.TextBox tbQtdeMinima;
-        private System.Windows.Forms.TextBox tbDescricao;
+        private System.Windows.Forms.TextBox txtPrecoUnitario;
+        private System.Windows.Forms.TextBox txtQuantidadeMinima;
+        private System.Windows.Forms.TextBox txtDescricao;
     }
 }

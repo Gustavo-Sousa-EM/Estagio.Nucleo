@@ -26,6 +26,8 @@ namespace Estagio.WinForms
         {
             CrieColunasELinhasDoDataGrid();
         }
+
+        //
         private void CrieColunasELinhasDoDataGrid()
         {
             dgvProdutos.Columns.Add(new DataGridViewTextBoxColumn
@@ -47,20 +49,21 @@ namespace Estagio.WinForms
 
         protected virtual object AdquiraNomeDaPrimeiraColuna()
         {
-            return new Object();
+            return new object();
         }
         protected virtual object AdquiraNomeDaSegundaColuna()
         {
-            return new Object();
+            return new object();
         }
-        
 
 
-        protected virtual Object selecioneProduto()
+
+        protected object ObtenhaProdutoSelecionado()
         {
             return bsDgvProdutos.Current;
         }
-        protected virtual Form InicializeFrmComObjeto(Object objeto)
+
+        protected virtual Form CrieFormulario(object objeto)
         {
             return new Form();
         }
@@ -69,27 +72,31 @@ namespace Estagio.WinForms
 
         private void btnNovo_Click(object sender, EventArgs e)
         {
-            var frmCadastroDeProduto = InicializeFrmComObjeto(objeto);
-            var resultado = frmCadastroDeProduto.ShowDialog();
+            var frmCadastro = CrieFormulario(objeto);
+            var resultado = frmCadastro.ShowDialog();
             if (resultado == DialogResult.OK)
             {
-                OnShown(e);
+                AtualizeTelaDeAterrissagem();
             }
+        }
+
+        private void AtualizeTelaDeAterrissagem()
+        {
+            
         }
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            var produtoSelecionado = selecioneProduto();
+            var produtoSelecionado = ObtenhaProdutoSelecionado();
             if (produtoSelecionado == null)
             {
                 MessageBox.Show("Selecione um Produto!");
                 return;
             }
-            var frmEditarProduto = InicializeFrmComObjeto(selecioneProduto());
+            var frmEditarProduto = CrieFormulario(ObtenhaProdutoSelecionado());
             var resultado = frmEditarProduto.ShowDialog();
             if (resultado == DialogResult.OK)
             {
-                OnShown(e);
             }
         }
 
@@ -102,7 +109,6 @@ namespace Estagio.WinForms
                 if (resultado == DialogResult.Yes)
                 {
                     excluaProduto();
-                    OnShown(e);
                 }
             }
             catch (Exception)
@@ -115,13 +121,13 @@ namespace Estagio.WinForms
         {
             throw new Exception();
         }
-       
+
 
         private void btnFechar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-       
+
     }
 }

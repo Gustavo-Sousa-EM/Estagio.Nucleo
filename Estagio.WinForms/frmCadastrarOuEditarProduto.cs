@@ -8,126 +8,100 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Estagio.Nucleo;
+using Estagio.Nucleo.Repositorios;
 
 namespace Estagio.WinForms
 {
     public partial class frmCadastrarOuEditarProduto : FrmBaseCadastrarOuEditar
     {
-        public Produto novoProduto { get; set; }
+        public Produto Produto { get; set; }
 
 
-        public frmCadastrarOuEditarProduto(/*Produto produto*/)
+        public frmCadastrarOuEditarProduto()
         {
-
             InitializeComponent();
-            //PreenchaTableBoxDoFormulario(produto);
+            txtPrecoUnitario.FormatoMonetario();
+            txtQuantidadeMinima.FormatoInteiro();
         }
 
         protected override void OnShown(EventArgs e)
         {
-            if (novoProduto != null)
+            base.OnShown(e);
+            if (Produto != null)
             {
-                tbDescricao.Text = novoProduto.Descricao;
-                tbPrecoUnitario.Text = novoProduto.PrecoUnitario.ToString();
-                tbQtdeMinima.Text = novoProduto.QuantidadeMinimaEstoque.ToString();
-                base.OnShown(e);
+                txtDescricao.Text = Produto.Descricao;
+                txtPrecoUnitario.Text = Produto.PrecoUnitario.ToString();
+                txtQuantidadeMinima.Text = Produto.QuantidadeMinimaEstoque.ToString();
             }
         }
 
-        //private void PreenchaTableBoxDoFormulario(Produto produto)
-        //{
-            
-        //        novoProduto = produto;
-               
-            
-        //}
-
-
-        
-        protected override void btnConfirmar_Click(object sender, EventArgs e)
+        protected override void Grave()
         {
-            try
+            AjustePropriedades();
+
+            if (EhNovoProduto())
             {
-                valideCamposNulosOuVazios();
-                if (EhNovoProduto())
-                {
-                    InsiraNovoId();
-                    insiraAtributosDeProduto();
-                    Nucleo.Repositorios.RepositorioDoProduto.Instancia.Add(novoProduto);
-                    MessageBox.Show("Produto Cadastrado!", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    DialogResult = DialogResult.OK;
-                }
-                else
-                {
-                    insiraAtributosDeProduto();
-                    Nucleo.Repositorios.RepositorioDoProduto.Instancia.Update(novoProduto);
-                    MessageBox.Show("Produto Atualizado!", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    DialogResult = DialogResult.OK;
-                }
+                RepositorioDoProduto.Instancia.Add(Produto);
             }
-            catch (Exception)
+            else
             {
-                MessageBox.Show("Campos vazios!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                RepositorioDoProduto.Instancia.Update(Produto);
             }
         }
 
-
-
-        private void InsiraNovoId()
+        private void AjustePropriedades()
         {
-            novoProduto.Id = Nucleo.Repositorios.RepositorioDoProduto.Instancia.GetAllId() + 1;
-        }
-
-        private void insiraAtributosDeProduto()
-        {
-            novoProduto.Descricao = tbDescricao.Text;
-            novoProduto.PrecoUnitario = Convert.ToDecimal(tbPrecoUnitario.Text);
-            novoProduto.QuantidadeMinimaEstoque = int.Parse(tbQtdeMinima.Text);
+            Produto = Produto ?? new Produto();
+            Produto.Descricao = txtDescricao.Text;
+            Produto.PrecoUnitario = Convert.ToDecimal(txtPrecoUnitario.Text);
+            Produto.QuantidadeMinimaEstoque = int.Parse(txtQuantidadeMinima.Text);
         }
 
         private bool EhNovoProduto()
         {
-            return novoProduto.Descricao == null;
+            return Produto == null || Produto.Id == 0;
         }
 
-        private void valideCamposNulosOuVazios()
+        protected override bool PodeConfirmar()
         {
-            ValidacaoDeCampos.CampoEhVazioOuNulo(tbPrecoUnitario.Text);
-            ValidacaoDeCampos.CampoEhVazioOuNulo(tbDescricao.Text);
-            ValidacaoDeCampos.CampoEhVazioOuNulo(tbQtdeMinima.Text);
+            if (!FoiInformadoOCampo(txtDescricao, "Informe a descrição")) return false;
+            if (!FoiInformadoOCampo(txtPrecoUnitario, "Informe preço unitário")) return false;
+            if (!FoiInformadoOCampo(txtQuantidadeMinima, "Informe a quantidade unitária")) return false;
+            return true;
         }
 
 
 
-        private void tbPrecoUnitario_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            var teclaBackSpace = 8;
-            var teclaVirgula = 44;
-            if (!char.IsNumber(e.KeyChar) && e.KeyChar != teclaBackSpace && e.KeyChar != teclaVirgula)
-            {
-                e.Handled = true;
-            }
-        }
 
-        private void tbQtdeMinima_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsNumber(e.KeyChar) && e.KeyChar != 8)
-            {
-                e.Handled = true;
-            }
-        }
+        //private void tbPrecoUnitario_KeyPress(object sender, KeyPressEventArgs e)
+        //{
+        //    var teclaBackSpace = 8;
+        //    var teclaVirgula = 44;
+        //    if (!char.IsNumber(e.KeyChar) && e.KeyChar != teclaBackSpace && e.KeyChar != teclaVirgula)
+        //    {
+        //        e.Handled = true;
+        //    }
+        //}
 
-        private void tbPrecoUnitario_Leave(object sender, EventArgs e)
-        {
-            try
-            {
-                tbPrecoUnitario.Text = ValidacaoDeCampos.formateStringEmDecimal(tbPrecoUnitario.Text);
-            }
-            catch (Exception)
-            {
+        //private void tbQtdeMinima_KeyPress(object sender, KeyPressEventArgs e)
+        //{
+        //    if (!char.IsNumber(e.KeyChar) && e.KeyChar != 8)
+        //    {
+        //        e.Handled = true;
+        //    }
+        //}
 
-            }
+        //private void tbPrecoUnitario_Leave(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        txtPrecoUnitario.Text = ValidacaoDeCampos.formateStringEmDecimal(txtPrecoUnitario.Text);
+        //    }
+        //    catch (Exception)
+        //    {
 
-        }
+        //    }
+
+        //}
     }
 }

@@ -18,11 +18,32 @@ namespace Estagio.WinForms
         }
 
 
-        protected virtual void btnConfirmar_Click(object sender, EventArgs e)
+        private void btnConfirmar_Click(object sender, EventArgs e)
         {
-            throw new Exception();
+            if (!PodeConfirmar())
+            {
+                return;
+            }
+            Grave();
+            ExibaMensagemDeSucesso();
+            DialogResult = DialogResult.OK;
+            Close();
         }
 
+        protected virtual void ExibaMensagemDeSucesso()
+        {
+            MessageBox.Show("Atualizado com sucesso!", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+        protected virtual void Grave()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual bool PodeConfirmar()
+        {
+            throw new NotImplementedException();
+        }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
