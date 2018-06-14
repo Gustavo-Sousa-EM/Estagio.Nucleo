@@ -54,7 +54,6 @@ namespace Estagio.WinForms
         {
             dgvProdutos.Columns.Add(new DataGridViewTextBoxColumn
             {
-                //AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
                 Width = 100,
                 DataPropertyName = nameof(Produto.Id),
                 Name = nameof(Produto.Id)
