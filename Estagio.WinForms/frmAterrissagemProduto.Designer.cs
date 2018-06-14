@@ -36,12 +36,12 @@
             this.descricaoDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.quantidadeMinimaEstoqueDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.precoUnitarioDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.bsDgvProdutos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsDgv)).BeginInit();
+            this.pnlConteudo.SuspendLayout();
             this.SuspendLayout();
             // 
-            // bsDgvProdutos
+            // txtFiltroDoGrid
             // 
-            this.bsDgvProdutos.Position = 0;
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -99,7 +99,9 @@
             this.Name = "frmAterrissagemProduto";
             this.Text = "frmAterrissagemProduto";
             this.Load += new System.EventHandler(this.frmAterrissagemProduto_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.bsDgvProdutos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsDgv)).EndInit();
+            this.pnlConteudo.ResumeLayout(false);
+            this.pnlConteudo.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -35,16 +35,18 @@
             this.btnExcluir = new System.Windows.Forms.Button();
             this.btnFechar = new System.Windows.Forms.Button();
             this.dgvProdutos = new System.Windows.Forms.DataGridView();
-            this.bsDgvProdutos = new System.Windows.Forms.BindingSource(this.components);
+            this.bsDgv = new System.Windows.Forms.BindingSource(this.components);
+            this.txtFiltroDoGrid = new System.Windows.Forms.TextBox();
             this.pnlConteudo.SuspendLayout();
             this.flpBotoes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdutos)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsDgvProdutos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsDgv)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlConteudo
             // 
             this.pnlConteudo.Controls.Add(this.dgvProdutos);
+            this.pnlConteudo.Controls.Add(this.txtFiltroDoGrid);
             this.pnlConteudo.Controls.Add(this.flpBotoes);
             // 
             // flpBotoes
@@ -106,13 +108,24 @@
             // dgvProdutos
             // 
             this.dgvProdutos.AutoGenerateColumns = false;
+            this.dgvProdutos.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvProdutos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProdutos.DataSource = this.bsDgvProdutos;
-            this.dgvProdutos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvProdutos.Location = new System.Drawing.Point(0, 0);
+            this.dgvProdutos.DataSource = this.bsDgv;
+            this.dgvProdutos.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dgvProdutos.Location = new System.Drawing.Point(0, 20);
             this.dgvProdutos.Name = "dgvProdutos";
-            this.dgvProdutos.Size = new System.Drawing.Size(639, 338);
+            this.dgvProdutos.Size = new System.Drawing.Size(639, 318);
             this.dgvProdutos.TabIndex = 1;
+            // 
+            // txtFiltroDoGrid
+            // 
+            this.txtFiltroDoGrid.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtFiltroDoGrid.Dock = System.Windows.Forms.DockStyle.Top;
+            this.txtFiltroDoGrid.Location = new System.Drawing.Point(0, 0);
+            this.txtFiltroDoGrid.Name = "txtFiltroDoGrid";
+            this.txtFiltroDoGrid.Size = new System.Drawing.Size(639, 20);
+            this.txtFiltroDoGrid.TabIndex = 2;
+            this.txtFiltroDoGrid.TextChanged += new System.EventHandler(this.txtFiltroDoGrid_TextChanged);
             // 
             // frmBaseAterrissagem
             // 
@@ -121,12 +134,12 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Name = "frmBaseAterrissagem";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmBaseAterrissagem";
-            this.Load += new System.EventHandler(this.frmBaseAterrissagem_Load);
+            this.Text = "Cadastro de produto";
             this.pnlConteudo.ResumeLayout(false);
+            this.pnlConteudo.PerformLayout();
             this.flpBotoes.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdutos)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsDgvProdutos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsDgv)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -137,8 +150,9 @@
         private System.Windows.Forms.Button btnEditar;
         private System.Windows.Forms.Button btnExcluir;
         private System.Windows.Forms.Button btnFechar;
-        protected System.Windows.Forms.BindingSource bsDgvProdutos;
+        protected System.Windows.Forms.BindingSource bsDgv;
         protected System.Windows.Forms.DataGridView dgvProdutos;
         protected System.Windows.Forms.FlowLayoutPanel flpBotoes;
+        protected System.Windows.Forms.TextBox txtFiltroDoGrid;
     }
 }

@@ -20,8 +20,8 @@ namespace Estagio.WinForms
         public frmCadastrarOuEditarProduto()
         {
             InitializeComponent();
-            txtDescricao.f
             txtPrecoUnitario.FormatoMonetario();
+            txtDescricao.MaxLength = 100;
             txtQuantidadeMinima.FormatoInteiro();
         }
 
@@ -35,7 +35,7 @@ namespace Estagio.WinForms
                 txtQuantidadeMinima.Text = Produto.QuantidadeMinimaEstoque.ToString();
             }
         }
-
+        
         protected override void Grave()
         {
             AjustePropriedades();
@@ -66,8 +66,8 @@ namespace Estagio.WinForms
         protected override bool PodeConfirmar()
         {
             if (!FoiInformadoOCampo(txtDescricao, "Informe a descrição")) return false;
-            if (!FoiInformadoOCampo(txtPrecoUnitario, "Informe preço unitário")) return false;
             if (!FoiInformadoOCampo(txtQuantidadeMinima, "Informe a quantidade unitária")) return false;
+            if (!FoiInformadoOCampo(txtPrecoUnitario, "Informe preço unitário")) return false;
             return true;
         }
 

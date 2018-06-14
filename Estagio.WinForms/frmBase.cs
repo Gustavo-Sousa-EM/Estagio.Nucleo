@@ -28,5 +28,9 @@ namespace Estagio.WinForms
             return true;
         }
 
+        protected void exibaMensagem()
+        {
+            sslMessage.Text = "Olá";
+        }
     }
 }

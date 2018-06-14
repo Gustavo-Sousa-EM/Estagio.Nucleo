@@ -21,23 +21,23 @@ namespace Estagio.WinForms
             InitializeComponent();
         }
 
-
-        private void frmBaseAterrissagem_Load(object sender, EventArgs e)
+        protected override void OnShown(EventArgs e)
         {
-            CrieColunasELinhasDoDataGrid();
+            base.OnShown(e);
+            //if (DesignMode) return;
+            MonteColunasELinhasDoDataGrid();
         }
 
         //
-        protected virtual void CrieColunasELinhasDoDataGrid()
+        protected virtual void MonteColunasELinhasDoDataGrid()
         {
-            throw new NotImplementedException();
         }
 
 
 
         protected object ObtenhaProdutoSelecionado()
         {
-            return bsDgvProdutos.Current;
+            return bsDgv.Current;
         }
 
         protected virtual Form CrieFormulario(object objeto)
@@ -69,7 +69,7 @@ namespace Estagio.WinForms
                 var produtoSelecionado = ObtenhaProdutoSelecionado();
                 if (produtoSelecionado != null)
                 {
-                    var frmEditarProduto = CrieFormulario(ObtenhaProdutoSelecionado());
+                    var frmEditarProduto = CrieFormulario(produtoSelecionado);
                     var resultado = frmEditarProduto.ShowDialog();
                     if (resultado == DialogResult.OK)
                     {
@@ -77,7 +77,7 @@ namespace Estagio.WinForms
                     }
                 }
             }
-            catch(Exception)
+            catch (Exception)
             {
                 MessageBox.Show("Não é Possível editar um produto inexistente!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -88,7 +88,7 @@ namespace Estagio.WinForms
             var resultado = MessageBox.Show("Tem Certeza que deseja excluir o produto?", "Atenção", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
             try
             {
-                var produtoSelecionado = bsDgvProdutos.Current;
+                var produtoSelecionado = bsDgv.Current;
                 if (resultado == DialogResult.Yes)
                 {
                     excluaProduto();
@@ -111,6 +111,15 @@ namespace Estagio.WinForms
             this.Close();
         }
 
+        private void txtFiltroDoGrid_TextChanged(object sender, EventArgs e)
+        {
+            var textBox = (TextBox)sender;
+            bsDgv.DataSource = ConsulteComFiltro(textBox);
+        }
 
+        protected virtual object ConsulteComFiltro(TextBox textBox)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -28,7 +28,7 @@ namespace Estagio.WinForms
 
 
             Produto produto02 = new Produto();
-            produto02.PrecoUnitario = 30;
+            produto02.PrecoUnitario = 30.20m;
             produto02.QuantidadeMinimaEstoque = 20;
             produto02.Descricao = "BATATA";
 
@@ -50,7 +50,7 @@ namespace Estagio.WinForms
             AtualizeTelaDeAterrissagem();
         }
 
-        protected override void CrieColunasELinhasDoDataGrid()
+        protected override void MonteColunasELinhasDoDataGrid()
         {
             dgvProdutos.Columns.Add(new DataGridViewTextBoxColumn
             {
@@ -70,8 +70,8 @@ namespace Estagio.WinForms
 
         protected override void AtualizeTelaDeAterrissagem()
         {
-            bsDgvProdutos.DataSource = RepositorioDoProduto.Instancia.GetAll();
-            bsDgvProdutos.ResetBindings(true);
+            bsDgv.DataSource = RepositorioDoProduto.Instancia.GetAll();
+            bsDgv.ResetBindings(true);
         }
 
 
@@ -89,7 +89,9 @@ namespace Estagio.WinForms
             AtualizeTelaDeAterrissagem();
         }
 
-
-
+        protected override object ConsulteComFiltro(TextBox textBox)
+        {
+            return RepositorioDoProduto.Instancia.GetAll().Where(p => p.Descricao.Contains(textBox.Text.ToUpper()) || p.Id.ToString().ToUpper() == textBox.Text);
+        }
     }
 }

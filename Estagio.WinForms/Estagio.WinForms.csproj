@@ -76,6 +76,7 @@
     <Compile Include="frmCadastrarOuEditarProduto.Designer.cs">
       <DependentUpon>frmCadastrarOuEditarProduto.cs</DependentUpon>
     </Compile>
+    <Compile Include="MetodosDeExtensaoCriarColunas.cs" />
     <Compile Include="MetodosDeExtensaoFormatacaoDeControles.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
