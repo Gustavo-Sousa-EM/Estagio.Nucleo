@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Estagio.Nucleo")]
+[assembly: AssemblyTitle("Estagio.Winform")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Estagio.Nucleo")]
+[assembly: AssemblyProduct("Estagio.Winform")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("6427a6be-4098-4afa-9360-c7c20a6e891f")]
+[assembly: Guid("20738b3e-34d5-40fc-9420-103fceff8fdc")]
 
 // Version information for an assembly consists of the following four values:
 //

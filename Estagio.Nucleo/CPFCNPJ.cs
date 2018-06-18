@@ -27,14 +27,14 @@ namespace Estagio.Nucleo
 
         public string Numero { get => _numero; }
 
-        private bool EhDoTamanhoCorretoDeCNPJ(string numero)
+        private bool EhDoTamanhoCorretoDeCNPJ()
         {
-            return numero.Length == TamanhoDoCNPJ;
+            return _numero.Length == TamanhoDoCNPJ;
         }
 
-        private bool EhDoTamanhoCorretoDoCPF(string numero)
+        private bool EhDoTamanhoCorretoDoCPF()
         {
-            return numero.Length == TamanhoDoCPF;
+            return _numero.Length == TamanhoDoCPF;
         }
 
         private void RemovaCarecteresNaoNumericos()
@@ -44,7 +44,7 @@ namespace Estagio.Nucleo
 
         private bool EhCPFValido()
         {
-            if (!EhDoTamanhoCorretoDoCPF(_numero))
+            if (!EhDoTamanhoCorretoDoCPF())
             {
                 return false;
             }
@@ -91,7 +91,7 @@ namespace Estagio.Nucleo
 
         private bool EhCPNJValido()
         {
-            if (!EhDoTamanhoCorretoDeCNPJ(_numero))
+            if (!EhDoTamanhoCorretoDeCNPJ())
             {
                 return false;
             }
@@ -105,7 +105,7 @@ namespace Estagio.Nucleo
 
             for (var i = 0; i < 12; i++)
             {
-                soma += numeros[i] * multiplicador1[i];
+                soma +=  numeros[i] * multiplicador1[i];
             }
 
             var resto = soma % 11;
@@ -141,21 +141,22 @@ namespace Estagio.Nucleo
 
         public string ObtenhaCPFCNPJFormatado()
         {
-            var cpfFormatado = String.Empty;
-            if (EhDoTamanhoCorretoDoCPF(_numero))
+            if (EhDoTamanhoCorretoDoCPF())
             {
-                cpfFormatado = Convert.ToUInt64(_numero).ToString(@"000\.000\.000\-00");
+                var cpfFormatado = Convert.ToUInt64(_numero).ToString(@"000\.000\.000\-00");
+                return cpfFormatado;
             }
             else
             {
-                cpfFormatado = Convert.ToUInt64(_numero).ToString(@"00\.000\.000\/0000\-00");
+                var cnpjFormatado = Convert.ToUInt64(_numero).ToString(@"00\.000\.000\/0000\-00");
+                return cnpjFormatado;
             }
-            return cpfFormatado;
+            
         }
 
         public override string ToString()
         {
-            return _numero;
+            return ObtenhaCPFCNPJFormatado();
         }
 
         public override bool Equals(object obj)
@@ -163,10 +164,6 @@ namespace Estagio.Nucleo
             return (obj is CPFCNPJ cPFCNPJ) && cPFCNPJ._numero == _numero;
         }
 
-        public override int GetHashCode()
-        {
-            return _numero.GetHashCode();
-        }
 
     }
-}
+} 
