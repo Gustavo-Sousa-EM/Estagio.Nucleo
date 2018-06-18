@@ -139,25 +139,25 @@ namespace Estagio.Nucleo
             return true;
         }
 
-        public string ObtenhaCPFCNPJFormatado()
-        {
-            if (EhDoTamanhoCorretoDoCPF())
-            {
-                var cpfFormatado = Convert.ToUInt64(_numero).ToString(@"000\.000\.000\-00");
-                return cpfFormatado;
-            }
-            else
-            {
-                var cnpjFormatado = Convert.ToUInt64(_numero).ToString(@"00\.000\.000\/0000\-00");
-                return cnpjFormatado;
-            }
+        //public string ObtenhaCPFCNPJFormatado()
+        //{
+        //    if (EhDoTamanhoCorretoDoCPF())
+        //    {
+        //        var cpfFormatado = Convert.ToUInt64(_numero).ToString(@"000\.000\.000\-00");
+        //        return cpfFormatado;
+        //    }
+        //    else
+        //    {
+        //        var cnpjFormatado = Convert.ToUInt64(_numero).ToString(@"00\.000\.000\/0000\-00");
+        //        return cnpjFormatado;
+        //    }
             
-        }
+        //}
 
-        public override string ToString()
-        {
-            return ObtenhaCPFCNPJFormatado();
-        }
+        //public override string ToString()
+        //{
+        //    return ObtenhaCPFCNPJFormatado();
+        //}
 
         public override bool Equals(object obj)
         {

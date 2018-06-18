@@ -64,7 +64,23 @@ namespace Estagio.Nucleo.Repositorio
 
         public Cliente GetById(int Id)
         {
-            return null;
+            var cliente = new Cliente();
+
+            var sql = "SELECT CLIEID, CLIENOME, CLIECPFCNPJ FROM TBCLIENTES WHERE CLIEID = @CLIEID";
+            using (var cmd = DBHelper.Instancia.CrieComando(sql))
+            {
+                cmd.Parameters.Add(DBHelper.Instancia.CrieParametro("@CLIEID", Id));
+                using (DBDataReader dr = cmd.ExecuteReader())
+                {
+                    if (dr.Read())
+                    {
+                        cliente.Id = dr.GetInteger("CLIEID");
+                        cliente.Nome = dr.GetString("CLIENOME");
+                        cliente.CPFCNPJ = new CPFCNPJ(dr.GetString("CLIECPFCNPJ"));
+                    }
+                }
+            }
+            return cliente;
         }
 
         public void UpDate(Cliente item)

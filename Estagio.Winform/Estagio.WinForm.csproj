@@ -133,6 +133,9 @@
     <EmbeddedResource Include="Base\frmBaseNovoOuEditar.resx">
       <DependentUpon>frmBaseNovoOuEditar.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Cliente\frmEditarOuCadastrarCliente.resx">
+      <DependentUpon>frmEditarOuCadastrarCliente.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmPrincipal.resx">
       <DependentUpon>frmPrincipal.cs</DependentUpon>
     </EmbeddedResource>

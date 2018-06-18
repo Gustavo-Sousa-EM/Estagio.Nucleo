@@ -66,12 +66,29 @@ namespace Estagio.Nucleo.Repositorio
 
         public Produto GetById(int Id)
         {
-            return null;
+            var produto = new Produto();
+
+            var sql = "SELECT PRODID, PRODDESCRICAO, PRODPRCUNITARIO, PRODQTDMINIMA FROM TBPRODUTOS WHERE PRODID = @PRODID";
+            using (var cmd = DBHelper.Instancia.CrieComando(sql))
+            {
+                cmd.Parameters.Add(DBHelper.Instancia.CrieParametro("@PRODID", Id));
+                using (DBDataReader dr = cmd.ExecuteReader())
+                {
+                    if (dr.Read())
+                    {
+                        produto.Id = dr.GetInteger("FORNID");
+                        produto.Descricao = dr.GetString("PRODDESCRICAO");
+                        produto.PrecoUnitario = dr.GetDecimal("PRODPRCUNITARIO");
+                        produto.QuantidadeMinimaEstoque = dr.GetInteger("PRODQTDMINIMA");
+                    }
+                }
+            }
+            return produto;
         }
 
         public void UpDate(Produto item)
         {
-            var sql = "UPDATE TBPRODUTOS SET PRODDESCRICAO = @PRODDESCRICAO, PRODPRCUNITARIO = @PRODPRCUNITARIO, PRODQTDMINIMA = @PRODQTDMINIMA, WHERE PRODID = @PRODID";
+            var sql = "UPDATE TBPRODUTOS SET PRODDESCRICAO = @PRODDESCRICAO, PRODPRCUNITARIO = @PRODPRCUNITARIO, PRODQTDMINIMA = @PRODQTDMINIMA WHERE PRODID = @PRODID";
             using (var cmd = DBHelper.Instancia.CrieComando(sql))
             {
                 cmd.Parameters.Add(DBHelper.Instancia.CrieParametro("@PRODID", item.Id));

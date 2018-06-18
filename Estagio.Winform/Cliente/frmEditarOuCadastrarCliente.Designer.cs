@@ -49,22 +49,23 @@
             // 
             // txtNome
             // 
+            this.txtNome.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtNome.Location = new System.Drawing.Point(148, 33);
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(130, 20);
             this.txtNome.TabIndex = 29;
             // 
-            // lbCNPJ
+            // lbCPF
             // 
             this.lbCPF.AutoSize = true;
             this.lbCPF.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbCPF.Location = new System.Drawing.Point(36, 71);
             this.lbCPF.Name = "lbCPF";
-            this.lbCPF.Size = new System.Drawing.Size(53, 20);
+            this.lbCPF.Size = new System.Drawing.Size(44, 20);
             this.lbCPF.TabIndex = 33;
             this.lbCPF.Text = "CPF:";
             // 
-            // txtCNPJ
+            // txtCPF
             // 
             this.txtCPF.Location = new System.Drawing.Point(148, 73);
             this.txtCPF.Name = "txtCPF";
@@ -82,12 +83,12 @@
             this.lbNome.TabIndex = 35;
             this.lbNome.Text = "Nome:";
             // 
-            // frmEditarOuCadastrarForncedor
+            // frmEditarOuCadastrarCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(510, 334);
-            this.Name = "frmEditarOuCadastrarForncedor";
+            this.Name = "frmEditarOuCadastrarCliente";
             this.Text = "frmEditarOuCadastrarForncedor";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
