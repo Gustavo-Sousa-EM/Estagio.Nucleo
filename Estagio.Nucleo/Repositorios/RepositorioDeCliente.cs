@@ -19,14 +19,17 @@ namespace Estagio.Nucleo.Repositorios
 
         public void Add(Cliente item)
         {
+            if (item.Id == 0)
+            {
+                item.Id = _clientes.Max().Id + 1;
+                _clientes.Add(item);
+                return;
+            }
             if (_clientes.Contains(GetById(item.Id)))
             {
                 throw new ApplicationException("Produto ja existe!");
             }
-            else
-            {
-                _clientes.Add(item);
-            }
+            _clientes.Add(item);
         }
 
         public void Delete(Cliente item)
@@ -52,5 +55,12 @@ namespace Estagio.Nucleo.Repositorios
             Delete(item);
             _clientes.Add(item);
         }
+
+        public void Delete()
+        {
+            throw new NotImplementedException();
+        }
+
+        
     }
 }

@@ -32,13 +32,6 @@ namespace Estagio.WinForms
             produto02.QuantidadeMinimaEstoque = 20;
             produto02.Descricao = "BATATA";
 
-            //Cliente cliente01 = new Cliente();
-            //cliente01.Id = 1;
-            //cliente01.Nome = "Josivaldo";
-            //CPFCNPJ cPFCNPJCliente01 = new CPFCNPJ("447.685.060-03");
-            //cliente01.CPFCNPJ = cPFCNPJCliente01;
-
-            //RepositorioDeCliente.Instancia.Add(cliente01);
 
             RepositorioDoProduto.Instancia.Add(produto01);
             RepositorioDoProduto.Instancia.Add(produto02);
@@ -52,20 +45,8 @@ namespace Estagio.WinForms
 
         protected override void MonteColunasELinhasDoDataGrid()
         {
-            dgvProdutos.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                Width = 100,
-                DataPropertyName = nameof(Produto.Id),
-                Name = nameof(Produto.Id)
-            });
-
-            dgvProdutos.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
-                Width = 100,
-                DataPropertyName = nameof(Produto.Descricao),
-                Name = nameof(Produto.Descricao)
-            });
+            dgvProdutos.CrieColuna("Id", nameof(Produto.Id), 50);
+            dgvProdutos.CrieColuna("Descrição", nameof(Produto.Descricao));
         }
 
         protected override void AtualizeTelaDeAterrissagem()

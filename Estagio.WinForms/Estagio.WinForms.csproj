@@ -45,54 +45,92 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="frmAterrissagemProduto.cs">
+    <Compile Include="Cliente\frmAterrissagemCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmAterrissagemProduto.Designer.cs">
+    <Compile Include="Cliente\frmAterrissagemCliente.Designer.cs">
+      <DependentUpon>frmAterrissagemCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Cliente\frmCadastrarOuEditarCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cliente\frmCadastrarOuEditarCliente.Designer.cs">
+      <DependentUpon>frmCadastrarOuEditarCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Fornecedor\frmAterrissagemFornecedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fornecedor\frmAterrissagemFornecedor.Designer.cs">
+      <DependentUpon>frmAterrissagemFornecedor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Fornecedor\frmCadastrarOuEditarFornecedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fornecedor\frmCadastrarOuEditarFornecedor.Designer.cs">
+      <DependentUpon>frmCadastrarOuEditarFornecedor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrincipal.Designer.cs">
+      <DependentUpon>frmPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Produto\frmAterrissagemProduto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Produto\frmAterrissagemProduto.Designer.cs">
       <DependentUpon>frmAterrissagemProduto.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmBase.cs">
+    <Compile Include="frmBase\frmBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmBase.Designer.cs">
+    <Compile Include="frmBase\frmBase.Designer.cs">
       <DependentUpon>frmBase.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmBaseAterrissagem.cs">
+    <Compile Include="frmBase\frmBaseAterrissagem.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmBaseAterrissagem.Designer.cs">
+    <Compile Include="frmBase\frmBaseAterrissagem.Designer.cs">
       <DependentUpon>frmBaseAterrissagem.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmBaseCadastrarOuEditar.cs">
+    <Compile Include="frmBase\frmBaseCadastrarOuEditar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmBaseCadastrarOuEditar.Designer.cs">
+    <Compile Include="frmBase\frmBaseCadastrarOuEditar.Designer.cs">
       <DependentUpon>frmBaseCadastrarOuEditar.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmCadastrarOuEditarProduto.cs">
+    <Compile Include="Produto\frmCadastrarOuEditarProduto.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmCadastrarOuEditarProduto.Designer.cs">
+    <Compile Include="Produto\frmCadastrarOuEditarProduto.Designer.cs">
       <DependentUpon>frmCadastrarOuEditarProduto.cs</DependentUpon>
     </Compile>
     <Compile Include="MetodosDeExtensaoCriarColunas.cs" />
     <Compile Include="MetodosDeExtensaoFormatacaoDeControles.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="frmAterrissagemProduto.resx">
+    <EmbeddedResource Include="Cliente\frmCadastrarOuEditarCliente.resx">
+      <DependentUpon>frmCadastrarOuEditarCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fornecedor\frmCadastrarOuEditarFornecedor.resx">
+      <DependentUpon>frmCadastrarOuEditarFornecedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrincipal.resx">
+      <DependentUpon>frmPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Produto\frmAterrissagemProduto.resx">
       <DependentUpon>frmAterrissagemProduto.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmBase.resx">
+    <EmbeddedResource Include="frmBase\frmBase.resx">
       <DependentUpon>frmBase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmBaseAterrissagem.resx">
+    <EmbeddedResource Include="frmBase\frmBaseAterrissagem.resx">
       <DependentUpon>frmBaseAterrissagem.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmBaseCadastrarOuEditar.resx">
+    <EmbeddedResource Include="frmBase\frmBaseCadastrarOuEditar.resx">
       <DependentUpon>frmBaseCadastrarOuEditar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmCadastrarOuEditarProduto.resx">
+    <EmbeddedResource Include="Produto\frmCadastrarOuEditarProduto.resx">
       <DependentUpon>frmCadastrarOuEditarProduto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -127,5 +165,6 @@
   <ItemGroup>
     <None Include="Resources\DC3FA890-5056-B759-7AC6985D1D2AFFDD-logo.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

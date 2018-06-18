@@ -71,40 +71,5 @@ namespace Estagio.WinForms
             return true;
         }
 
-       
-
-
-
-
-        //private void tbPrecoUnitario_KeyPress(object sender, KeyPressEventArgs e)
-        //{
-        //    var teclaBackSpace = 8;
-        //    var teclaVirgula = 44;
-        //    if (!char.IsNumber(e.KeyChar) && e.KeyChar != teclaBackSpace && e.KeyChar != teclaVirgula)
-        //    {
-        //        e.Handled = true;
-        //    }
-        //}
-
-        //private void tbQtdeMinima_KeyPress(object sender, KeyPressEventArgs e)
-        //{
-        //    if (!char.IsNumber(e.KeyChar) && e.KeyChar != 8)
-        //    {
-        //        e.Handled = true;
-        //    }
-        //}
-
-        //private void tbPrecoUnitario_Leave(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        txtPrecoUnitario.Text = ValidacaoDeCampos.formateStringEmDecimal(txtPrecoUnitario.Text);
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //    }
-
-        //}
     }
 }
