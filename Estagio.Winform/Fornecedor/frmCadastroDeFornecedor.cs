@@ -16,14 +16,13 @@ namespace Estagio.WinForm
     {
         public frmCadastroDeFornecedor()
         {
-            RepositorioDeFornecedor.Instancia.GetById(1);
             InitializeComponent();
         }
 
         protected override void MonteColunas(DataGridView dgvGeral)
         {
-            dgvGeral.CrieColuna("Id", "Id", 90);
-            dgvGeral.CrieColuna("Nome", "Nome");
+            dgvGeral.CrieColuna("Id", nameof(Fornecedor.Id), 90);
+            dgvGeral.CrieColunaFill("Nome", nameof(Fornecedor.Nome));
         }
 
         protected override void RemovaItemDaLista(object itemSelecioando)
@@ -62,7 +61,7 @@ namespace Estagio.WinForm
 
         protected override void ExibaItemPesquisado(string textoPesquisado)
         {
-            bsGeral.DataSource = RepositorioDeFornecedor.Instancia.GetAll().Where(p => p.Nome.ToUpper().Contains(textoPesquisado) || p.Id.ToString().Contains(textoPesquisado)).ToList();
+            bsGeral.DataSource = RepositorioDeFornecedor.Instancia.GetAll().Where(p => p.Nome.ToUpper().Contains(textoPesquisado)).ToList();
             bsGeral.ResetBindings(false);
         }
 

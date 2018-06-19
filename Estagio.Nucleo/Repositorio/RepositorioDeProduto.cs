@@ -19,8 +19,7 @@ namespace Estagio.Nucleo.Repositorio
         {
             item.Id = DBHelper.Instancia.ObtenhaProximoId("PRODID", "TBPRODUTOS");
 
-            var sql = @"INSERT INTO TBPRODUTOS (PRODID, PRODDESCRICAO, PRODPRCUNITARIO, PRODQTDMINIMA)
- VALUES(@PRODID,@PRODDESCRICAO,@PRODPRCUNITARIO,@PRODQTDMINIMA)";
+            var sql = @"INSERT INTO TBPRODUTOS (PRODID, PRODDESCRICAO, PRODPRCUNITARIO, PRODQTDMINIMA) VALUES(@PRODID,@PRODDESCRICAO,@PRODPRCUNITARIO,@PRODQTDMINIMA)";
             using (var cmd = DBHelper.Instancia.CrieComando(sql))
             {
                 cmd.Parameters.Add(DBHelper.Instancia.CrieParametro("@PRODID", item.Id));
@@ -37,6 +36,41 @@ namespace Estagio.Nucleo.Repositorio
             using (var cmd = DBHelper.Instancia.CrieComando(sql))
             {
                 cmd.Parameters.Add(DBHelper.Instancia.CrieParametro("@PRODID", item.Id));
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public Produto GetById(int Id)
+        {
+            var produto = new Produto();
+
+            var sql = "SELECT PRODID, PRODDESCRICAO, PRODPRCUNITARIO, PRODQTDMINIMA FROM TBPRODUTOS WHERE PRODID = @PRODID";
+            using (var cmd = DBHelper.Instancia.CrieComando(sql))
+            {
+                cmd.Parameters.Add(DBHelper.Instancia.CrieParametro("@PRODID", Id));
+                using (DBDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        produto.Id = dr.GetInteger("PRODID");
+                        produto.Descricao = dr.GetString("PRODDESCRICAO");
+                        produto.PrecoUnitario = dr.GetDecimal("PRODPRCUNITARIO");
+                        produto.QuantidadeMinimaEstoque = dr.GetInteger("PRODQTDMINIMA");
+                    }
+                }
+            }
+            return produto;
+        }
+
+        public void UpDate(Produto item)
+        {
+            var sql = "UPDATE TBPRODUTOS SET PRODDESCRICAO = @PRODDESCRICAO, PRODPRCUNITARIO = @PRODPRCUNITARIO, PRODQTDMINIMA = @PRODQTDMINIMA WHERE PRODID = @PRODID";
+            using (var cmd = DBHelper.Instancia.CrieComando(sql))
+            {
+                cmd.Parameters.Add(DBHelper.Instancia.CrieParametro("@PRODID", item.Id));
+                cmd.Parameters.Add(DBHelper.Instancia.CrieParametro("@PRODDESCRICAO", item.Descricao));
+                cmd.Parameters.Add(DBHelper.Instancia.CrieParametro("@PRODPRCUNITARIO", item.PrecoUnitario));
+                cmd.Parameters.Add(DBHelper.Instancia.CrieParametro("@PRODQTDMINIMA", item.QuantidadeMinimaEstoque));
                 cmd.ExecuteNonQuery();
             }
         }
@@ -62,42 +96,6 @@ namespace Estagio.Nucleo.Repositorio
                 }
             }
             return produtos;
-        }
-
-        public Produto GetById(int Id)
-        {
-            var produto = new Produto();
-
-            var sql = "SELECT PRODID, PRODDESCRICAO, PRODPRCUNITARIO, PRODQTDMINIMA FROM TBPRODUTOS WHERE PRODID = @PRODID";
-            using (var cmd = DBHelper.Instancia.CrieComando(sql))
-            {
-                cmd.Parameters.Add(DBHelper.Instancia.CrieParametro("@PRODID", Id));
-                using (DBDataReader dr = cmd.ExecuteReader())
-                {
-                    if (dr.Read())
-                    {
-                        produto.Id = dr.GetInteger("FORNID");
-                        produto.Descricao = dr.GetString("PRODDESCRICAO");
-                        produto.PrecoUnitario = dr.GetDecimal("PRODPRCUNITARIO");
-                        produto.QuantidadeMinimaEstoque = dr.GetInteger("PRODQTDMINIMA");
-                    }
-                }
-            }
-            return produto;
-        }
-
-        public void UpDate(Produto item)
-        {
-            var sql = "UPDATE TBPRODUTOS SET PRODDESCRICAO = @PRODDESCRICAO, PRODPRCUNITARIO = @PRODPRCUNITARIO, PRODQTDMINIMA = @PRODQTDMINIMA WHERE PRODID = @PRODID";
-            using (var cmd = DBHelper.Instancia.CrieComando(sql))
-            {
-                cmd.Parameters.Add(DBHelper.Instancia.CrieParametro("@PRODID", item.Id));
-                cmd.Parameters.Add(DBHelper.Instancia.CrieParametro("@PRODDESCRICAO", item.Descricao));
-                cmd.Parameters.Add(DBHelper.Instancia.CrieParametro("@PRODPRCUNITARIO", item.PrecoUnitario));
-                cmd.Parameters.Add(DBHelper.Instancia.CrieParametro("@PRODQTDMINIMA", item.QuantidadeMinimaEstoque));
-                cmd.ExecuteNonQuery();
-            }
-
         }
     }
 }

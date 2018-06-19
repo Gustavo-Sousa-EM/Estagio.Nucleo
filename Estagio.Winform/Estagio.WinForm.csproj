@@ -60,6 +60,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControlesDeUsuario\ucBasePesquisa.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlesDeUsuario\ucBasePesquisa.Designer.cs">
+      <DependentUpon>ucBasePesquisa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlesDeUsuario\ucPesquisaCliente.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlesDeUsuario\ucPesquisaCliente.Designer.cs">
+      <DependentUpon>ucPesquisaCliente.cs</DependentUpon>
+    </Compile>
     <Compile Include="Base\frmBase.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +89,12 @@
     </Compile>
     <Compile Include="Base\frmBaseNovoOuEditar.Designer.cs">
       <DependentUpon>frmBaseNovoOuEditar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlesDeUsuario\ucPesquisaFornecedor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlesDeUsuario\ucPesquisaFornecedor.Designer.cs">
+      <DependentUpon>ucPesquisaFornecedor.cs</DependentUpon>
     </Compile>
     <Compile Include="Fornecedor\frmCadastroDeFornecedor.cs">
       <SubType>Form</SubType>
@@ -96,11 +114,23 @@
     <Compile Include="Cliente\frmEditarOuCadastrarCliente.Designer.cs">
       <DependentUpon>frmEditarOuCadastrarCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmMovimentacaoEntrada.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMovimentacaoEntrada.Designer.cs">
+      <DependentUpon>frmMovimentacaoEntrada.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmPrincipal.Designer.cs">
       <DependentUpon>frmPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMovimentacaoSaida.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMovimentacaoSaida.Designer.cs">
+      <DependentUpon>frmMovimentacaoSaida.cs</DependentUpon>
     </Compile>
     <Compile Include="MetodosDeExtenssaoCrieColunas.cs" />
     <Compile Include="Produto\frmCadastroDeProduto.cs">
@@ -109,11 +139,11 @@
     <Compile Include="Produto\frmCadastroDeProduto.Designer.cs">
       <DependentUpon>frmCadastroDeProduto.cs</DependentUpon>
     </Compile>
-    <Compile Include="Fornecedor\frmEditarOuCadastrarForncedor.cs">
+    <Compile Include="Fornecedor\frmEditarOuCadastrarFornecedor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Fornecedor\frmEditarOuCadastrarForncedor.Designer.cs">
-      <DependentUpon>frmEditarOuCadastrarForncedor.cs</DependentUpon>
+    <Compile Include="Fornecedor\frmEditarOuCadastrarFornecedor.Designer.cs">
+      <DependentUpon>frmEditarOuCadastrarFornecedor.cs</DependentUpon>
     </Compile>
     <Compile Include="Produto\frmEditarOuCadastrarProduto.cs">
       <SubType>Form</SubType>
@@ -124,6 +154,27 @@
     <Compile Include="MetodosDeExtensaoFormatacaoDeControles.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="frmPesquisa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPesquisa.Designer.cs">
+      <DependentUpon>frmPesquisa.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Cliente\frmCadastroDeCliente.resx">
+      <DependentUpon>frmCadastroDeCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cliente\frmEditarOuCadastrarCliente.resx">
+      <DependentUpon>frmEditarOuCadastrarCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlesDeUsuario\ucBasePesquisa.resx">
+      <DependentUpon>ucBasePesquisa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlesDeUsuario\ucPesquisaFornecedor.resx">
+      <DependentUpon>ucPesquisaFornecedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fornecedor\frmCadastroDeFornecedor.resx">
+      <DependentUpon>frmCadastroDeFornecedor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Base\frmBase.resx">
       <DependentUpon>frmBase.cs</DependentUpon>
     </EmbeddedResource>
@@ -133,17 +184,20 @@
     <EmbeddedResource Include="Base\frmBaseNovoOuEditar.resx">
       <DependentUpon>frmBaseNovoOuEditar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Cliente\frmEditarOuCadastrarCliente.resx">
-      <DependentUpon>frmEditarOuCadastrarCliente.cs</DependentUpon>
+    <EmbeddedResource Include="frmMovimentacaoEntrada.resx">
+      <DependentUpon>frmMovimentacaoEntrada.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPrincipal.resx">
       <DependentUpon>frmPrincipal.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmMovimentacaoSaida.resx">
+      <DependentUpon>frmMovimentacaoSaida.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Produto\frmCadastroDeProduto.resx">
       <DependentUpon>frmCadastroDeProduto.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Fornecedor\frmEditarOuCadastrarForncedor.resx">
-      <DependentUpon>frmEditarOuCadastrarForncedor.cs</DependentUpon>
+    <EmbeddedResource Include="Fornecedor\frmEditarOuCadastrarFornecedor.resx">
+      <DependentUpon>frmEditarOuCadastrarFornecedor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Produto\frmEditarOuCadastrarProduto.resx">
       <DependentUpon>frmEditarOuCadastrarProduto.cs</DependentUpon>
@@ -158,6 +212,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="frmPesquisa.resx">
+      <DependentUpon>frmPesquisa.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -194,6 +251,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search_16.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

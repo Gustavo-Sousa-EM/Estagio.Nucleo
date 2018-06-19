@@ -20,14 +20,10 @@ namespace Estagio.WinForm
             InitializeComponent();
         }
 
-        private void frmCadastroDeProduto_Load(object sender, EventArgs e)
-        {
-        }
-
         protected override void MonteColunas(DataGridView dgvGeral)
         {
             dgvGeral.CrieColuna("Id", nameof(Produto.Id), 90);
-            dgvGeral.CrieColuna("Descrição", nameof(Produto.Descricao));
+            dgvGeral.CrieColunaFill("Descrição", nameof(Produto.Descricao));
         }
 
 
@@ -66,14 +62,14 @@ namespace Estagio.WinForm
 
         protected override void ExibaItemPesquisado(string textoPesquisado)
         {
-            bsGeral.DataSource = RepositorioDeProduto.Instancia.GetAll().Where(p => p.Descricao.ToUpper().Contains(textoPesquisado) || p.Id.ToString().Contains(textoPesquisado)).ToList();
+            bsGeral.DataSource = RepositorioDeProduto.Instancia.GetAll().Where(p => p.Descricao.ToUpper().Contains(textoPesquisado)).ToList();
             bsGeral.ResetBindings(false);
-            
         }
 
         protected override string ObtenhaMensagemDeExlusao()
         {
             return "Produto excluído!";
         }
+
     }
 }

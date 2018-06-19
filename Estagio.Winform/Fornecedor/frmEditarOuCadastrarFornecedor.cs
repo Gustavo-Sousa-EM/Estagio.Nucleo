@@ -20,7 +20,7 @@ namespace Estagio.WinForm
         {
             InitializeComponent();
             txtNome.FormatoTexto();
-            txtCNPJ.FormatoCpfCnpj();
+            txtCPFCNPJ.FormatoCPFCNPJ();
         }
 
         protected override void OnShown(EventArgs e)
@@ -29,7 +29,7 @@ namespace Estagio.WinForm
             if(Fornecedor != null)
             {
                 txtNome.Text = Fornecedor.Nome;
-                txtCNPJ.Text = Fornecedor.CPFCNPJ.ToString();
+                txtCPFCNPJ.Text = Fornecedor.CPFCNPJ.ToString();
             }
         }
 
@@ -57,30 +57,29 @@ namespace Estagio.WinForm
         {
             Fornecedor = Fornecedor ?? new Fornecedor();
             Fornecedor.Nome = txtNome.Text;
-            var CNPJ = new CPFCNPJ(txtCNPJ.Text);
+            var CNPJ = new CPFCNPJ(txtCPFCNPJ.Text);
             Fornecedor.CPFCNPJ = CNPJ;
         }
 
         protected override bool PodeConfirmar()
         {
-            if (!EhCpfOuCnpjValido()) return false;
+            if (!EhCPFCNPJValido()) return false;
             if (!FoiInformadoOCampo(txtNome, "Informe nome")) return false;
-            if (!FoiInformadoOCampo(txtCNPJ, "Informe CNPJ")) return false;
+            if (!FoiInformadoOCampo(txtCPFCNPJ, "Informe CNPJ")) return false;
             return true;
         }
 
-        private bool EhCpfOuCnpjValido()
+        private bool EhCPFCNPJValido()
         {
-            try
-            {
-                var CPF = new CPFCNPJ(txtCNPJ.Text);
+            try{
+                var CNPJ = new CPFCNPJ(txtCPFCNPJ.Text);
                 return true;
             }
-            catch (ApplicationException)
+            catch(ApplicationException)
             {
-                MessageBox.Show("CPF/CNPJ inválido", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("CPF ou CNPJ inválido", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            txtCNPJ.Focus();
+            txtCPFCNPJ.Focus();
             return false;
         }
     }

@@ -14,6 +14,7 @@ namespace Estagio.Nucleo.Repositorio
         {
 
         }
+
         private List<MovimentacaoDeEstoqueAbstrato> _movimentacaoDeEstoqueAbstratos = new List<MovimentacaoDeEstoqueAbstrato>();
 
         public void Add(MovimentacaoDeEstoqueAbstrato item)

@@ -20,7 +20,7 @@ namespace Estagio.WinForm
         {
             InitializeComponent();
             txtNome.FormatoTexto();
-            txtCPF.FormatoCpfCnpj();
+            txtCPFCNPJ.FormatoCPFCNPJ();
         }
 
         protected override void OnShown(EventArgs e)
@@ -29,7 +29,7 @@ namespace Estagio.WinForm
             if (Cliente != null)
             {
                 txtNome.Text = Cliente.Nome;
-                txtCPF.Text = Cliente.CPFCNPJ.ToString();
+                txtCPFCNPJ.Text = Cliente.CPFCNPJ.ToString();
             }
         }
 
@@ -57,31 +57,32 @@ namespace Estagio.WinForm
         {
             Cliente = Cliente ?? new Cliente();
             Cliente.Nome = txtNome.Text;
-            var CPF = new CPFCNPJ(txtCPF.Text);
+            var CPF = new CPFCNPJ(txtCPFCNPJ.Text);
             Cliente.CPFCNPJ = CPF;
         }
 
         protected override bool PodeConfirmar()
         {
-            if (!EhCpfOuCnpjValido()) return false;
+            if (!EhCPFCNPJValido()) return false;
             if (!FoiInformadoOCampo(txtNome, "Informe nome")) return false;
-            if (!FoiInformadoOCampo(txtCPF, "Informe CNPJ")) return false;
+            if (!FoiInformadoOCampo(txtCPFCNPJ, "Informe CNPJ")) return false;
             return true;
         }
 
-        private bool EhCpfOuCnpjValido()
+        private bool EhCPFCNPJValido()
         {
             try
             {
-                var CPF = new CPFCNPJ(txtCPF.Text);
+                var CNPJ = new CPFCNPJ(txtCPFCNPJ.Text);
                 return true;
             }
             catch (ApplicationException)
             {
-                MessageBox.Show("CPF/CNPJ inválido", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("CPF ou CNPJ inválido", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtCPFCNPJ.Focus();
+                return false;
             }
-            txtCPF.Focus();
-            return false;
+            
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Estagio.WinForm
             InitializeComponent();
         }
 
-        private void btnConfirmar_Click(object sender, EventArgs e)
+        private void btnConfirmar_Click_1(object sender, EventArgs e)
         {
             if (!PodeConfirmar())
             {
