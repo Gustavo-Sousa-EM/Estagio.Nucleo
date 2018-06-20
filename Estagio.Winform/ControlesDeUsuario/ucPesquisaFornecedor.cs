@@ -7,11 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Estagio.Nucleo;
 
 namespace Estagio.WinForm.ControlesDeUsuario
 {
     public partial class ucPesquisaFornecedor : ucBasePesquisa
     {
+        public Fornecedor Fornecedor { get; set; }
         public ucPesquisaFornecedor()
         {
             InitializeComponent();
@@ -21,6 +23,7 @@ namespace Estagio.WinForm.ControlesDeUsuario
         {
             var resultado = frmPesquisa.AbraPesquisaFornecedor(out var fornecedor);
             objeto = fornecedor;
+            Fornecedor = fornecedor;
             return resultado;
         }
     }

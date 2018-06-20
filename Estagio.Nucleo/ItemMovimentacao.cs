@@ -13,6 +13,11 @@ namespace Estagio.Nucleo
             }
         }
 
+
+        public void insiraProduto(Produto novoProduto)
+        {
+            Produto = novoProduto;
+        }
         // somente ler esse lista
         //public IEnumerable<ItemMovimentacao> Itens =>_itemMovimentacao.AsReadOnly();
 

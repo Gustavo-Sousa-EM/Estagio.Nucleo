@@ -16,6 +16,7 @@ namespace Estagio.WinForm
     {
         public frmCadastroDeFornecedor()
         {
+         
             InitializeComponent();
         }
 

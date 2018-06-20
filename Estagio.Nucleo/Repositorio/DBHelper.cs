@@ -19,7 +19,7 @@ namespace Estagio.Nucleo.Repositorio
         public DbConnection CrieConexao()
         {
             var sbConnection = new FbConnectionStringBuilder();
-            sbConnection.Database = @"D:\WorkGustavo\BancoDeDados\BDESTAGIO.FDB";
+            sbConnection.Database = @"D:\GiTWork\BancoDeDados\BDESTAGIO.FDB";
             sbConnection.DataSource = "localhost";
             sbConnection.UserID = "sysdba";
             sbConnection.Password = "masterkey";

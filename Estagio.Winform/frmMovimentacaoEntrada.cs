@@ -12,11 +12,17 @@ using Estagio.Nucleo.Repositorio;
 
 namespace Estagio.WinForm
 {
-    public partial class frmMovimentacaoEntrada : frmBase 
+    public partial class frmMovimentacaoEntrada : frmBase
     {
+        private MovimentacaoDeEntrada movimentacaoDeEntrada = new MovimentacaoDeEntrada();
+
+
         public frmMovimentacaoEntrada()
         {
+
+
             InitializeComponent();
+            movimentacaoDeEntrada.Itens = new List<ItemMovimentacao>();
             MonteColunas();
         }
 
@@ -42,8 +48,41 @@ namespace Estagio.WinForm
 
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
-            //var FornecedorSelecionado =  
-            var ProdutoSelecionado = bsGeral.Current;
+            if (FoiInformadoOsCampos())
+            {
+                movimentacaoDeEntrada.Fornecedor = ucPesquisaFornecedor.Fornecedor;
+                movimentacaoDeEntrada.Data = dtpEntrada.Value.Date;
+                RepositorioDeMovimentacao.Instancia.Add(movimentacaoDeEntrada);
+            }
+            
+        }
+
+     
+
+        private void btnAdicionar_Click(object sender, EventArgs e)
+        {
+            
+            movimentacaoDeEntrada.Itens.Add(AdicioneUmNovoItemDeMovimentacao());
+            MessageBox.Show("Adicionado!");
+            
+        }
+
+        private ItemMovimentacao AdicioneUmNovoItemDeMovimentacao()
+        {
+            ItemMovimentacao novoItemMovimentacao = new ItemMovimentacao();
+            novoItemMovimentacao.Quantidade = Convert.ToInt32(txtQuantidade.Text);
+            novoItemMovimentacao.ValorUnitario = Convert.ToDecimal(txtValor.Text);
+            novoItemMovimentacao.insiraProduto((Produto)bsGeral.Current);
+            return novoItemMovimentacao;
+        }
+
+        private bool FoiInformadoOsCampos()
+        {
+            if (!FoiInformadoOCampo(txtQuantidade, "Informe a Quantidade")) return false;
+            if (!FoiInformadoOCampo(txtValor, "Informe o valor")) return false;
+
+            return true;
         }
     }
+
 }
