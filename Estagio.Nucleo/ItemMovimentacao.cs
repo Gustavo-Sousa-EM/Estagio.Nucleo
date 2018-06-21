@@ -16,7 +16,14 @@ namespace Estagio.Nucleo
 
         public void insiraProduto(Produto novoProduto)
         {
-            Produto = novoProduto;
+            if(novoProduto.Id != 0)
+            {
+                Produto = novoProduto;
+            }
+            else
+            {
+                throw new System.ApplicationException("Selecione um produto!");
+            }
         }
         // somente ler esse lista
         //public IEnumerable<ItemMovimentacao> Itens =>_itemMovimentacao.AsReadOnly();

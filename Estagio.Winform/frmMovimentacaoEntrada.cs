@@ -19,9 +19,14 @@ namespace Estagio.WinForm
 
         public frmMovimentacaoEntrada()
         {
-
-
             InitializeComponent();
+
+            dgvProdutosSelecionados.AllowUserToAddRows = false;
+            dgvProdutosSelecionados.AllowUserToDeleteRows = false;
+            dgvProdutosSelecionados.AllowUserToOrderColumns = false;
+            dgvProdutosSelecionados.AllowUserToResizeColumns = false;
+            dgvProdutosSelecionados.AllowUserToResizeRows = false;
+
             movimentacaoDeEntrada.Itens = new List<ItemMovimentacao>();
             MonteColunas();
         }
@@ -29,7 +34,7 @@ namespace Estagio.WinForm
         protected override void OnShown(EventArgs e)
         {
             base.OnShown(e);
-            AtualizeDataGrid();
+            AtualizeDataGrid(bsGeral);
         }
 
         private void MonteColunas()
@@ -38,12 +43,20 @@ namespace Estagio.WinForm
             dgvGeral.CrieColuna("Preço Unit.", nameof(Produto.PrecoUnitario), 100);
             dgvGeral.CrieColuna("Qtd. Mínima de Estoque", nameof(Produto.QuantidadeMinimaEstoque), 160);
 
+
+            dgvProdutosSelecionados.CrieColunaFill("Descrição", nameof(movimentacaoDeEntrada.Itens.Produto));
+            dgvProdutosSelecionados.CrieColuna("Preço Unitario", nameof(ItemMovimentacao.ValorUnitario), 100);
+            dgvProdutosSelecionados.CrieColuna("Quantidade", nameof(ItemMovimentacao.Quantidade), 100);
+            dgvProdutosSelecionados.CrieColuna("SubTotal", nameof(ItemMovimentacao.ValorMovimentacao), 100);
+
+            dgvProdutosSelecionados.Columns[0].ReadOnly = true;
+            dgvProdutosSelecionados.Columns[3].ReadOnly = true;
         }
 
-        private void AtualizeDataGrid()
+        private void AtualizeDataGrid(BindingSource bindingSource)
         {
-            bsGeral.DataSource = RepositorioDeProduto.Instancia.GetAll();
-            bsGeral.ResetBindings(false);
+            bindingSource.DataSource = RepositorioDeProduto.Instancia.GetAll();
+            bindingSource.ResetBindings(false);
         }
 
         private void btnConfirmar_Click(object sender, EventArgs e)
@@ -62,19 +75,11 @@ namespace Estagio.WinForm
         private void btnAdicionar_Click(object sender, EventArgs e)
         {
             
-            movimentacaoDeEntrada.Itens.Add(AdicioneUmNovoItemDeMovimentacao());
             MessageBox.Show("Adicionado!");
             
         }
 
-        private ItemMovimentacao AdicioneUmNovoItemDeMovimentacao()
-        {
-            ItemMovimentacao novoItemMovimentacao = new ItemMovimentacao();
-            novoItemMovimentacao.Quantidade = Convert.ToInt32(txtQuantidade.Text);
-            novoItemMovimentacao.ValorUnitario = Convert.ToDecimal(txtValor.Text);
-            novoItemMovimentacao.insiraProduto((Produto)bsGeral.Current);
-            return novoItemMovimentacao;
-        }
+   
 
         private bool FoiInformadoOsCampos()
         {
@@ -82,6 +87,56 @@ namespace Estagio.WinForm
             if (!FoiInformadoOCampo(txtValor, "Informe o valor")) return false;
 
             return true;
+        }
+
+        private void dgvGeral_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (!ContemProdutoSelecionado())
+            {
+                bsProdutosSelecionados.Insert(bsProdutosSelecionados.Count, insiraValoresNoDgvProdutosSelecionados());
+                dgvProdutosSelecionados.Refresh();
+                return;
+            }
+            else
+            {
+                atualizeQuantidade();
+                bsProdutosSelecionados.ResetBindings(false);
+                movimentacaoDeEntrada.Itens.Add((ItemMovimentacao)bsProdutosSelecionados.DataSource);
+            }
+            
+        }
+
+        private bool ContemProdutoSelecionado()
+        {
+            return bsProdutosSelecionados.Contains(bsGeral.Current);
+        }
+
+        private ItemMovimentacao insiraValoresNoDgvProdutosSelecionados()
+        {
+            ItemMovimentacao novoItemMovimentacao = new ItemMovimentacao();
+            Produto produto = new Produto();
+            produto = (Produto)bsGeral.Current;
+
+
+            novoItemMovimentacao.Quantidade = 1;
+            novoItemMovimentacao.ValorUnitario = produto.PrecoUnitario;
+            novoItemMovimentacao.insiraProduto(produto);
+            return novoItemMovimentacao;
+
+        }
+
+        private void atualizeQuantidade()
+        {
+            foreach(var item in movimentacaoDeEntrada.Itens)
+            {
+                var produto = (Produto)bsGeral.Current;
+               if (produto.Id == item.Produto.Id)
+                {
+                    var quantidade = item.Quantidade;
+                    item.Quantidade = quantidade++;
+                    dgvGeral.Refresh();
+                }
+            } 
         }
     }
 

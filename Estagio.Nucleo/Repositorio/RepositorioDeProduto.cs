@@ -32,7 +32,18 @@ namespace Estagio.Nucleo.Repositorio
 
         public void Delete(Produto item)
         {
+            busqueReferenciaDoProduto(item);
             var sql = "DELETE FROM TBPRODUTOS WHERE PRODID = @PRODID";
+            using (var cmd = DBHelper.Instancia.CrieComando(sql))
+            {
+                cmd.Parameters.Add(DBHelper.Instancia.CrieParametro("@PRODID", item.Id));
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        private void busqueReferenciaDoProduto(Produto item)
+        {
+            var sql = "ALTER TABLE TBPRODUTOS NOCHECK CONSTRAINT PRODID = @PRODID";
             using (var cmd = DBHelper.Instancia.CrieComando(sql))
             {
                 cmd.Parameters.Add(DBHelper.Instancia.CrieParametro("@PRODID", item.Id));
