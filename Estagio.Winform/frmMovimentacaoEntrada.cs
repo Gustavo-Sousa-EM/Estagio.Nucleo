@@ -67,9 +67,20 @@ namespace Estagio.WinForm
                 movimentacaoDeEntrada.Fornecedor = ucPesquisaFornecedor.Fornecedor;
                 movimentacaoDeEntrada.Data = dtpEntrada.Value.Date;
                 RepositorioDeMovimentacao.Instancia.Add(movimentacaoDeEntrada);
+
                 MessageBox.Show("Sucesso!");
+                LimpeOFormulario();
             }
 
+
+        }
+
+        private void LimpeOFormulario()
+        {
+            movimentacaoDeEntrada.Itens.Clear();
+            ucPesquisaFornecedor.limpeTextBox();
+            bsProdutosSelecionados.ResetBindings(false);
+            atualizeValorTotal();
         }
 
         private bool FoiInformadoOsCampos()
@@ -111,6 +122,7 @@ namespace Estagio.WinForm
         {
             var produto = (Produto)bsGeral.Current;
             var valid = false;
+            if (movimentacaoDeEntrada.Itens == null) return valid;
             foreach (var item in movimentacaoDeEntrada.Itens)
             {
                 valid = item.Produto.Id == produto.Id;
