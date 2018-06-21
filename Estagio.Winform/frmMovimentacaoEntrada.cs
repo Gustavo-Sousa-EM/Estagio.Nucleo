@@ -14,8 +14,8 @@ namespace Estagio.WinForm
 {
     public partial class frmMovimentacaoEntrada : frmBase
     {
-        private MovimentacaoDeEntrada movimentacaoDeEntrada = new MovimentacaoDeEntrada();
-
+        //private MovimentacaoDeEntrada movimentacaoDeEntrada = new MovimentacaoDeEntrada();
+        private List<ItemMovimentacao> _itensDeMovimentacao  = new List<ItemMovimentacao>();
 
         public frmMovimentacaoEntrada()
         {
@@ -27,7 +27,7 @@ namespace Estagio.WinForm
             dgvProdutosSelecionados.AllowUserToResizeColumns = false;
             dgvProdutosSelecionados.AllowUserToResizeRows = false;
 
-            movimentacaoDeEntrada.Itens = new List<ItemMovimentacao>();
+            //movimentacaoDeEntrada.Itens = new List<ItemMovimentacao>();
             MonteColunas();
         }
 
@@ -64,6 +64,7 @@ namespace Estagio.WinForm
         {
             if (FoiInformadoOsCampos())
             {
+                MovimentacaoDeEntrada movimentacaoDeEntrada = new MovimentacaoDeEntrada();
                 movimentacaoDeEntrada.Fornecedor = ucPesquisaFornecedor.Fornecedor;
                 movimentacaoDeEntrada.Data = dtpEntrada.Value.Date;
                 RepositorioDeMovimentacao.Instancia.Add(movimentacaoDeEntrada);
@@ -77,7 +78,7 @@ namespace Estagio.WinForm
 
         private void LimpeOFormulario()
         {
-            movimentacaoDeEntrada.Itens.Clear();
+            _itensDeMovimentacao.Clear();
             ucPesquisaFornecedor.limpeTextBox();
             bsProdutosSelecionados.ResetBindings(false);
             atualizeValorTotal();
@@ -114,16 +115,17 @@ namespace Estagio.WinForm
 
         private void atualizeValorTotal()
         {
-            
-            txtTotal.Text = movimentacaoDeEntrada.ValorTotal.ToString();
+            var valorTotal = _itensDeMovimentacao.Select(t => t.ValorMovimentacao)
+            var valorTotalDecimal = Convert.ToDecimal(valorTotal);
+            txtTotal.Text += valorTotal.ToString();
         }
 
         private bool ContemProdutoSelecionado()
         {
             var produto = (Produto)bsGeral.Current;
             var valid = false;
-            if (movimentacaoDeEntrada.Itens == null) return valid;
-            foreach (var item in movimentacaoDeEntrada.Itens)
+            if (_itensDeMovimentacao == null) return valid;
+            foreach (var item in _itensDeMovimentacao)
             {
                 valid = item.Produto.Id == produto.Id;
             }
@@ -141,15 +143,15 @@ namespace Estagio.WinForm
             itemMovimentacao.ValorUnitario = produto.PrecoUnitario;
             itemMovimentacao.insiraProduto(produto);
 
-            movimentacaoDeEntrada.Itens.Add(itemMovimentacao);
+            _itensDeMovimentacao.Add(itemMovimentacao);
 
-            return movimentacaoDeEntrada.Itens;
+            return _itensDeMovimentacao;
         }
 
         private void atualizeQuantidade()
         {
             var produto = (Produto)bsGeral.Current;
-            foreach (var item in movimentacaoDeEntrada.Itens)
+            foreach (var item in _itensDeMovimentacao)
             {
 
                 if (produto.Id == item.Produto.Id)
@@ -169,7 +171,7 @@ namespace Estagio.WinForm
         private void btnExcluir_Click(object sender, EventArgs e)
         {
             var produtoSelecionado = (ItemMovimentacao)bsProdutosSelecionados.Current;
-            movimentacaoDeEntrada.Itens.Remove(produtoSelecionado);
+            _itensDeMovimentacao.Remove(produtoSelecionado);
             bsProdutosSelecionados.ResetBindings(false);
             atualizeValorTotal();
         }
