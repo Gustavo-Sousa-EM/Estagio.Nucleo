@@ -49,6 +49,7 @@
             // 
             // txtNome
             // 
+            this.txtNome.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtNome.Location = new System.Drawing.Point(148, 33);
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(130, 20);
@@ -64,10 +65,10 @@
             this.lbCPFCNPJ.TabIndex = 33;
             this.lbCPFCNPJ.Text = "CPF/CNPJ:";
             // 
-            // txtCPF
+            // txtCPFCNPJ
             // 
             this.txtCPFCNPJ.Location = new System.Drawing.Point(148, 73);
-            this.txtCPFCNPJ.Name = "txtCPF";
+            this.txtCPFCNPJ.Name = "txtCPFCNPJ";
             this.txtCPFCNPJ.Size = new System.Drawing.Size(128, 20);
             this.txtCPFCNPJ.TabIndex = 30;
             this.txtCPFCNPJ.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;

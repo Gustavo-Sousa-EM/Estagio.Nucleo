@@ -76,10 +76,17 @@ namespace Estagio.WinForm
             var resultado = MessageBox.Show("Deseja excluir o item?", "Atenção", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (resultado == DialogResult.Yes)
             {
-                RemovaItemDaLista(itemSelecioando);
-                AtualizeDataGrid();
-
-                MessageBox.Show(ObtenhaMensagemDeExlusao(), "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                try
+                {
+                    RemovaItemDaLista(itemSelecioando);
+                    AtualizeDataGrid();
+                    MessageBox.Show(ObtenhaMensagemDeExlusao(), "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Não foi possível excluir:\nO item possui movimentações registradas!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                
             }
 
         }

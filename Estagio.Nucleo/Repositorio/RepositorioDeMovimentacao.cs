@@ -48,7 +48,6 @@ namespace Estagio.Nucleo.Repositorio
                         cmd.ExecuteNonQuery();
                     }
                 }
-
             }
         }
 
