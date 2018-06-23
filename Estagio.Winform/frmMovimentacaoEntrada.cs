@@ -67,6 +67,7 @@ namespace Estagio.WinForm
                 MovimentacaoDeEntrada movimentacaoDeEntrada = new MovimentacaoDeEntrada();
                 movimentacaoDeEntrada.Fornecedor = ucPesquisaFornecedor.Fornecedor;
                 movimentacaoDeEntrada.Data = dtpEntrada.Value.Date;
+                movimentacaoDeEntrada.Itens = _itensDeMovimentacao;
                 RepositorioDeMovimentacao.Instancia.Add(movimentacaoDeEntrada);
 
                 MessageBox.Show("Sucesso!");
@@ -115,9 +116,8 @@ namespace Estagio.WinForm
 
         private void atualizeValorTotal()
         {
-            var valorTotal = _itensDeMovimentacao.Select(t => t.ValorMovimentacao)
-            var valorTotalDecimal = Convert.ToDecimal(valorTotal);
-            txtTotal.Text += valorTotal.ToString();
+            var valorTotal = _itensDeMovimentacao.Sum(t => t.ValorMovimentacao);
+            txtTotal.Text = valorTotal.ToString();
         }
 
         private bool ContemProdutoSelecionado()

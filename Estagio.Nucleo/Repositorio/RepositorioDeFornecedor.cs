@@ -17,7 +17,7 @@ namespace Estagio.Nucleo.Repositorio
 
         public void Add(Fornecedor item)
         {
-            //item.Id = DBHelper.Instancia.ObtenhaProximoId("FORNID", "TBFORNECEDORES");
+            item.Id = DBHelper.Instancia.ObtenhaProximoId("FORNID", "TBFORNECEDORES");
 
             var sql = "INSERT INTO TBFORNECEDORES (FORNID, FORNNOME, FORNCPFCNPJ) VALUES (@FORNID, @FORNNOME, @FORNCPFCNPJ)";
             using (var cmd = DBHelper.Instancia.CrieComando(sql))
