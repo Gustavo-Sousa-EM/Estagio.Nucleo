@@ -155,11 +155,11 @@
             this.dgvProdutosSelecionados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProdutosSelecionados.DataSource = this.bsProdutosSelecionados;
             this.dgvProdutosSelecionados.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvProdutosSelecionados.Location = new System.Drawing.Point(423, 3);
+            this.dgvProdutosSelecionados.Location = new System.Drawing.Point(422, 3);
             this.dgvProdutosSelecionados.MultiSelect = false;
             this.dgvProdutosSelecionados.Name = "dgvProdutosSelecionados";
             this.dgvProdutosSelecionados.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProdutosSelecionados.Size = new System.Drawing.Size(564, 435);
+            this.dgvProdutosSelecionados.Size = new System.Drawing.Size(565, 435);
             this.dgvProdutosSelecionados.TabIndex = 26;
             this.dgvProdutosSelecionados.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProdutosSelecionados_CellValueChanged);
             // 
@@ -178,7 +178,7 @@
             this.dgvGeral.Name = "dgvGeral";
             this.dgvGeral.ReadOnly = true;
             this.dgvGeral.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvGeral.Size = new System.Drawing.Size(414, 435);
+            this.dgvGeral.Size = new System.Drawing.Size(413, 435);
             this.dgvGeral.TabIndex = 25;
             this.dgvGeral.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvGeral_CellMouseDoubleClick);
             // 
