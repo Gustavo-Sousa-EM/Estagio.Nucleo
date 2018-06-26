@@ -16,7 +16,6 @@ namespace Estagio.WinForm
     {
         //private MovimentacaoDeEntrada movimentacaoDeEntrada = new MovimentacaoDeEntrada();
         private List<ItemMovimentacaoMV> _itensDeMovimentacaoMV = new List<ItemMovimentacaoMV>();
-        private List<ItemMovimentacao> _itensDeMovimentacao = new List<ItemMovimentacao>();
 
         public frmMovimentacaoEntrada()
         {
@@ -79,6 +78,7 @@ namespace Estagio.WinForm
                     {
                         _itemMovimentacao.Quantidade = value;
                         RaisePropertyChanged("Quantidade");
+
                     }
                 }
             }
@@ -103,11 +103,114 @@ namespace Estagio.WinForm
 
             private void RaisePropertyChanged(string prop)
             {
-                
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
                 this.PropertyChanged -= this.PropertyChanged;
             }
         }
+
+        private List<ItemMovimentacao> AdicioneListaDeItensDeMovimentacao()
+        {
+            List<ItemMovimentacao> itensMovimentacoes = new List<ItemMovimentacao>();
+            foreach (var item in _itensDeMovimentacaoMV)
+            {
+                ItemMovimentacao itemMovimentacao = new ItemMovimentacao();
+                itemMovimentacao.insiraProduto(item.Produto);
+                itemMovimentacao.Quantidade = item.Quantidade;
+                itemMovimentacao.ValorUnitario = item.ValorUnitario;
+
+                itensMovimentacoes.Add(itemMovimentacao);
+            }
+            return itensMovimentacoes;
+        }
+
+        //delegate void ControleEventosDisparados(object source, EventArgs e);
+        //event ControleEventosDisparados ExcedeuQuantidadeDeEventos;
+        //public virtual void OnControleEventosDisparados(EventArgs e)
+        //{
+        //    if (!(ExcedeuQuantidadeDeEventos == null))
+        //    {
+        //        ExcedeuQuantidadeDeEventos(this, e);
+        //    }
+
+        //}
+        //public void LimiteEventosExcedidos(object source, EventArgs e)
+        //{
+        //    var produto = (Produto)bsGeral.Current;
+        //    MessageBox.Show($"Quantidade de {produto} foi alterado");
+        //}
+
+        private bool ContemProdutoSelecionado()
+        {
+            if (_itensDeMovimentacaoMV == null) return false;
+            foreach (var item in _itensDeMovimentacaoMV)
+            {
+                if (item.Produto == (Produto)bsGeral.Current)
+                {
+                    item.PropertyChanged += Item_PropertyChanged;
+                    item.Quantidade++;
+                    dgvGeral.Refresh();
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private List<ItemMovimentacaoMV> AdicioneUmNovoItemDeMovimentacao()
+        {
+
+            var produto = (Produto)bsGeral.Current;
+            ItemMovimentacao itemMovimentacao = new ItemMovimentacao();
+            ItemMovimentacaoMV itemMovimentacaoMV = new ItemMovimentacaoMV(itemMovimentacao);
+
+            itemMovimentacao.Quantidade = 1;
+            itemMovimentacao.ValorUnitario = produto.PrecoUnitario;
+            itemMovimentacao.insiraProduto(produto);
+
+            _itensDeMovimentacaoMV.Add(itemMovimentacaoMV);
+
+            return _itensDeMovimentacaoMV;
+        }
+
+        private void Item_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            MessageBox.Show($"{e.PropertyName} Alterado!");
+        }
+
+        private void dgvProdutosSelecionados_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            const int colunaQuantidade = 2;
+            var alteracao = (ItemMovimentacaoMV)bsProdutosSelecionados.Current;
+            foreach (var item in _itensDeMovimentacaoMV)
+            {
+                if (item.Produto == alteracao.Produto)
+                {
+                    item.PropertyChanged += Item_PropertyChanged;
+                    if (colunaQuantidade == e.ColumnIndex)
+                    {
+                        //Formula para que a messageBox do evento dispare corretamente
+                        item.Quantidade = (item.Quantidade += alteracao.Quantidade) / 2;
+                    }
+                    else //ColunaValorUnitario == e.ColumIndex
+                    {
+                        //Formula para que a messageBox do evento dispare corretamente
+                        item.ValorUnitario = (item.ValorUnitario += alteracao.ValorUnitario) / 2;
+                    }
+                }
+            }
+            dgvProdutosSelecionados.Refresh();
+            atualizeValorTotal();
+        }
+
+        private void dgvGeral_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (!ContemProdutoSelecionado())
+            {
+                bsProdutosSelecionados.DataSource = AdicioneUmNovoItemDeMovimentacao();
+            }
+            bsProdutosSelecionados.ResetBindings(false);
+            atualizeValorTotal();
+        }
+
 
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
@@ -116,7 +219,7 @@ namespace Estagio.WinForm
                 MovimentacaoDeEntrada movimentacaoDeEntrada = new MovimentacaoDeEntrada();
                 movimentacaoDeEntrada.Fornecedor = ucPesquisaFornecedor.Fornecedor;
                 movimentacaoDeEntrada.Data = dtpEntrada.Value.Date;
-                movimentacaoDeEntrada.Itens = _itensDeMovimentacao;
+                movimentacaoDeEntrada.Itens = AdicioneListaDeItensDeMovimentacao();
                 RepositorioDeMovimentacao.Instancia.Add(movimentacaoDeEntrada);
 
                 MessageBox.Show("Sucesso!");
@@ -126,7 +229,7 @@ namespace Estagio.WinForm
 
         private void LimpeOFormulario()
         {
-            _itensDeMovimentacao.Clear();
+            _itensDeMovimentacaoMV.Clear();
             ucPesquisaFornecedor.limpeTextBox();
             bsProdutosSelecionados.ResetBindings(false);
             atualizeValorTotal();
@@ -146,74 +249,19 @@ namespace Estagio.WinForm
                 dgvProdutosSelecionados.Focus();
                 return false;
             }
+            if (dtpEntrada.Value > DateTime.Now)
+            {
+                MessageBox.Show("Data não pode ser maior que data atual!", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                dtpEntrada.Focus();
+                return false;
+            }
             return true;
-        }
-
-        private void dgvGeral_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (!ContemProdutoSelecionado())
-            {
-                bsProdutosSelecionados.DataSource = AdicioneUmNovoItemDeMovimentacao();
-            }
-            bsProdutosSelecionados.ResetBindings(false);
-            atualizeValorTotal();
-        }
-
-        private void atualizeValorTotal()
-        {
-            var valorTotal = _itensDeMovimentacaoMV.Sum(t => t.ValorMovimentacao);
-            txtTotal.Text = valorTotal.ToString();
-        }
-
-        private bool ContemProdutoSelecionado()
-        {
-            if (_itensDeMovimentacaoMV == null) return false;
-            foreach (var item in _itensDeMovimentacaoMV)
-            {
-                if (item.Produto == (Produto)bsGeral.Current)
-                {
-                    item.PropertyChanged += Item_PropertyChanged;
-                    item.Quantidade++;
-                    dgvGeral.Refresh();
-                    return true;
-                }
-            }
-            return false;
-        }
-
-
-        private void Item_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            MessageBox.Show($"{e.PropertyName} Alterado!");
-        }
-
-        private void dgvProdutosSelecionados_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            var alteracao = (Produto)bsGeral.Current;
-            foreach (var item in _itensDeMovimentacaoMV)
-            {
-                if (item.Produto == alteracao)
-                {
-                    if(item.Quantidade == item.Quantidade)
-                    {
-                        item.Quantidade = item.Quantidade;
-                    }
-                    else
-                    {
-                        item.ValorUnitario = item.ValorUnitario;
-                    }
-                    item.PropertyChanged += Item_PropertyChanged;
-                    dgvGeral.Refresh();
-                }
-            }
-
-            atualizeValorTotal();
         }
 
         private void btnExcluir_Click(object sender, EventArgs e)
         {
-            var produtoSelecionado = (ItemMovimentacao)bsProdutosSelecionados.Current;
-            _itensDeMovimentacao.Remove(produtoSelecionado);
+            var produtoSelecionado = (ItemMovimentacaoMV)bsProdutosSelecionados.Current;
+            _itensDeMovimentacaoMV.Remove(produtoSelecionado);
             bsProdutosSelecionados.ResetBindings(false);
             atualizeValorTotal();
         }
@@ -223,23 +271,11 @@ namespace Estagio.WinForm
             this.Close();
         }
 
-
-        private List<ItemMovimentacaoMV> AdicioneUmNovoItemDeMovimentacao()
+        private void atualizeValorTotal()
         {
-
-            var produto = (Produto)bsGeral.Current;
-            ItemMovimentacao itemMovimentacao = new ItemMovimentacao();
-
-            itemMovimentacao.Quantidade = 1;
-            itemMovimentacao.ValorUnitario = produto.PrecoUnitario;
-            itemMovimentacao.insiraProduto(produto);
-            ItemMovimentacaoMV itemMovimentacaoMV = new ItemMovimentacaoMV(itemMovimentacao);
-            _itensDeMovimentacaoMV.Add(itemMovimentacaoMV);
-
-            return _itensDeMovimentacaoMV;
+            var valorTotal = _itensDeMovimentacaoMV.Sum(t => t.ValorMovimentacao);
+            txtTotal.Text = valorTotal.ToString();
         }
-
-      
     }
 
 }

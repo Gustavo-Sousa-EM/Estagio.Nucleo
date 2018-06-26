@@ -51,8 +51,7 @@ namespace Estagio.Nucleo.Repositorio
                 {
                     if (dr.Read())
                     {
-                        //return dr.GetInt32(0) + 1;
-                        return 1;
+                        return dr.GetInt32(0) + 1;
                     }
                 }
             }

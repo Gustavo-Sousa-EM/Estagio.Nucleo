@@ -34,9 +34,9 @@ namespace Estagio.Nucleo.Repositorio
                     cmd.ExecuteNonQuery();
                 }
 
-                sql = "INSERT INTO TBMOVENTRADAITENS(MVEITID, MVEITPRDOID, MVEITQUANT, MVEITVALOR, MVEITTOTAL) VALUES(@MVEITID, @MVEITPRDOID, @MVEITQUANT, @MVEITVALOR, @MVEITTOTAL)";
                 foreach (var itens in itemEntrada.Itens)
                 {
+                    sql = "INSERT INTO TBMOVENTRADAITENS(MVEITID, MVEITPRDOID, MVEITQUANT, MVEITVALOR, MVEITTOTAL) VALUES(@MVEITID, @MVEITPRDOID, @MVEITQUANT, @MVEITVALOR, @MVEITTOTAL)";
                     using (var cmd = DBHelper.Instancia.CrieComando(sql))
                     {
 
